@@ -2,12 +2,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray_bg"
     tools:context="com.miaxis.smartbank.fragment.IndexFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_notice"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:fab_addButtonColorNormal="@color/gold"
+        fab:fab_addButtonColorPressed="@color/gold_dark"
+        fab:fab_addButtonPlusIconColor="@color/white"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="right|bottom">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_title="列表布局"
+            fab:fab_colorPressed="@color/blue_band_light"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_title="网格布局"
+            fab:fab_colorPressed="@color/red"/>
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 </FrameLayout>

@@ -23,6 +23,7 @@
     <color name="gray_light">#e6e6e6</color>
     <color name="dark">#333</color>
     <color name="pink">#ffb0e8</color>
+    <color name="red_light">#bbffeded</color>
     <color name="green">#69af69</color>
     <color name="green_dark">#217821</color>
 </resources>

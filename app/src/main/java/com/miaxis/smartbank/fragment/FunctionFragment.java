@@ -14,11 +14,9 @@ import com.miaxis.smartbank.R;
  */
 public class FunctionFragment extends Fragment {
 
-
     public FunctionFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

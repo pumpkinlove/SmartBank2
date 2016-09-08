@@ -10,4 +10,9 @@
         <item name="android:colorControlHighlight">@color/blue_band_dark3</item>
     </style>
 
+    <style name="menu_labels_style">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

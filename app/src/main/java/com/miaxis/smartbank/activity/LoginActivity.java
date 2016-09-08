@@ -1,11 +1,10 @@
-package com.miaxis.smartbank;
+package com.miaxis.smartbank.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.miaxis.smartbank.activity.BaseActivity;
-import com.miaxis.smartbank.activity.MainActivity;
+import com.miaxis.smartbank.R;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
