@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include layout="@layout/head"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_notice"
             android:layout_weight="1"
@@ -18,6 +20,11 @@
             android:layout_height="0dp">
 
         </android.support.v7.widget.RecyclerView>
+
+        <View
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_weight="1"

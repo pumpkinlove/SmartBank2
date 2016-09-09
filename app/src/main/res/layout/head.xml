@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/white"
+    android:elevation="5dp">
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/tv_left"
+        android:clickable="true"
+        android:textSize="15sp"
+        android:text="返回"
+        android:background="@drawable/white_bg_gray_ripple"
+        android:textColor="@color/dark"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:drawableLeft="@mipmap/left_back_black"
+        android:drawablePadding="-40dp" />
+
+    <TextView
+        android:id="@+id/tv_middle"
+        android:textSize="16sp"
+        android:textColor="@color/dark"
+        android:background="@drawable/white_bg_gray_ripple"
+        android:text="中间"
+        android:gravity="center"
+        android:layout_weight="4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/tv_right"
+        android:clickable="true"
+        android:visibility="invisible"
+        android:textSize="15sp"
+        android:text="右边"
+        android:background="@drawable/white_bg_gray_ripple"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

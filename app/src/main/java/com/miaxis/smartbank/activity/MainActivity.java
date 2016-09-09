@@ -1,14 +1,19 @@
 package com.miaxis.smartbank.activity;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.adapter.MyFragmentAdapter;
-import com.miaxis.smartbank.fragment.ConfigFragment;
+import com.miaxis.smartbank.fragment.HomeFragment;
 import com.miaxis.smartbank.fragment.FunctionFragment;
 import com.miaxis.smartbank.fragment.IndexFragment;
 import com.miaxis.smartbank.fragment.TeamFragment;
@@ -33,12 +38,11 @@ public class MainActivity extends BaseActivity {
     private IndexFragment indexFragment;
     private TeamFragment teamFragment;
     private FunctionFragment functionFragment;
-    private ConfigFragment configFragment;
+    private HomeFragment homeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         initData();
         initView();
         initTabLayout();
@@ -51,14 +55,14 @@ public class MainActivity extends BaseActivity {
         indexFragment = new IndexFragment();
         teamFragment = new TeamFragment();
         functionFragment = new FunctionFragment();
-        configFragment = new ConfigFragment();
+        homeFragment = new HomeFragment();
 
 
         fragmentList = new ArrayList<>();
         fragmentList.add(indexFragment);
         fragmentList.add(teamFragment);
         fragmentList.add(functionFragment);
-        fragmentList.add(configFragment);
+        fragmentList.add(homeFragment);
 
         adapter = new MyFragmentAdapter(getSupportFragmentManager(),fragmentList);
 

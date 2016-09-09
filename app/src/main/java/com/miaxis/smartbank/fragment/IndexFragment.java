@@ -5,16 +5,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.adapter.NoticeAdapter;
 import com.miaxis.smartbank.domain.Notice;
 import com.miaxis.smartbank.utils.DateUtil;
 
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -27,12 +30,16 @@ import java.util.List;
  */
 public class IndexFragment extends Fragment {
 
+    @ViewInject(R.id.tv_middle)
+    private TextView tv_middle;
+
     @ViewInject(R.id.rv_notice)
     private RecyclerView rv_notice;
 
     private NoticeAdapter noticeAdapter;
 
     private List<Notice> noticeList;
+
 
     public IndexFragment() {
         // Required empty public constructor
@@ -64,21 +71,18 @@ public class IndexFragment extends Fragment {
         n.setTitle("1号窗口，请求援助");
         n.setOptime(DateUtil.toHourMinString(new Date()));
 
+        Notice n2 = new Notice();
+        n2.setTitle("2号窗口，差评");
+        n2.setOptime(DateUtil.toHourMinString(new Date()));
+
         noticeList.add(n);
-        noticeList.add(n);
-        noticeList.add(n);
-        noticeList.add(n);
-        noticeList.add(n);
-        noticeList.add(n);
-        noticeList.add(n);
-        noticeList.add(n);
-        noticeList.add(n);
-        noticeList.add(n);
+        noticeList.add(n2);
 
         noticeAdapter = new NoticeAdapter(noticeList, getContext());
     }
 
     private void initView() {
+        tv_middle.setText("通知");
         rv_notice.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         rv_notice.setAdapter(noticeAdapter);
         noticeAdapter.setNoticeListener(new NoticeAdapter.NoticeListener() {
@@ -90,8 +94,14 @@ public class IndexFragment extends Fragment {
         });
     }
 
+    @Event(R.id.fab_list)
     private void listLayout(View view) {
+        rv_notice.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
 
+    @Event(R.id.fab_grid)
+    private void gridLayout(View view) {
+        rv_notice.setLayoutManager(new GridLayoutManager(getActivity(), 3));
     }
 
 }

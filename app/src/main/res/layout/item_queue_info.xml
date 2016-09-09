@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/white_bg_gray_ripple"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:id="@+id/ll_queue">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/tv_queue_type_name"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/dark"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="个人业务" />
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_queue_wait_num"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/dark"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="10" />
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_queue_cur_num"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/green_dark"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="A001" />
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_queue_next_num"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/dark"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="A002" />
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_queue_average_wait_time"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/dark"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="A002" />
+    </LinearLayout>
+
+    <View
+        android:background="@color/gray_light"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+</LinearLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/white_bg_gray_ripple"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:id="@+id/ll_window">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/tv_window_no"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/dark"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="窗口号" />
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_window_worker_name"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/dark"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="柜员姓名" />
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_window_type"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/dark"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="业务类型" />
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_window_average_time"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/dark"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="平均办理时长" />
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_window_status"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/green_dark"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="状态" />
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/gray_light"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+</LinearLayout>

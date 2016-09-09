@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.domain.Notice;
 
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -56,7 +57,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
         return noticeList.size();
     }
 
-    class NoticeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class NoticeViewHolder extends RecyclerView.ViewHolder {
 
         @ViewInject(R.id.tvNoticeTitle)
         private TextView tvNoticeTitle;
@@ -75,9 +76,11 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
             x.view().inject(this, itemView);
         }
 
-        @Override
-        public void onClick(View view) {
-            listener.onItemClick(view, getPosition());
+        @Event(R.id.ll_item_notice)
+        private void onClick(View view) {
+            if(listener != null) {
+                listener.onItemClick(view, getPosition());
+            }
         }
     }
 

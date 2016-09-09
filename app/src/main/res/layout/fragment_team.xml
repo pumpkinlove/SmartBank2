@@ -4,10 +4,225 @@
     android:layout_height="match_parent"
     tools:context="com.miaxis.smartbank.fragment.TeamFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <include layout="@layout/head"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:background="@color/blue_band_light"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="35dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="业务类型" />
+
+                    <View
+                        android:background="@color/gray_light"
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="等待人数" />
+
+                    <View
+                        android:background="@color/gray_light"
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="当前办理" />
+
+                    <View
+                        android:background="@color/gray_light"
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="下一位" />
+
+                    <View
+                        android:background="@color/gray_light"
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="平均等待时间" />
+
+                </LinearLayout>
+
+                <View
+                    android:background="@color/gray_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_queue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <LinearLayout
+                android:background="@color/blue_band_dark3"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="35dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+                    <TextView
+                        android:id="@+id/tv_window_no"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="窗口号" />
+
+                    <View
+                        android:background="@color/gray_light"
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_window_worker_name"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="柜员姓名" />
+
+                    <View
+                        android:background="@color/gray_light"
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_window_type"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="业务类型" />
+
+                    <View
+                        android:background="@color/gray_light"
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_window_average_time"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="平均办理时长" />
+
+                    <View
+                        android:background="@color/gray_light"
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_window_status"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="状态" />
+
+                </LinearLayout>
+
+                <View
+                    android:background="@color/gray_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_window"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
 
 </FrameLayout>
