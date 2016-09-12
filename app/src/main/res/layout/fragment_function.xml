@@ -11,6 +11,131 @@
 
         <include layout="@layout/head"/>
 
+        <com.miaxis.smartbank.view.SlideShowView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"></com.miaxis.smartbank.view.SlideShowView>
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:textSize="15sp"
+                android:clickable="true"
+                android:background="@drawable/white_bg_blue_ripple"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="预填单"
+                android:id="@+id/tv_func_ciips" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:textSize="15sp"
+                android:clickable="true"
+                android:background="@drawable/white_bg_blue_ripple"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="网点活动"
+                android:id="@+id/tv_bank_event" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:textSize="15sp"
+                android:clickable="true"
+                android:background="@drawable/white_bg_blue_ripple"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="客流量分析"
+                android:id="@+id/tv_analyze" />
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:textSize="15sp"
+                android:clickable="true"
+                android:background="@drawable/white_bg_blue_ripple"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="理财产品"
+                android:id="@+id/tv_production" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:textSize="15sp"
+                android:clickable="true"
+                android:background="@drawable/white_bg_blue_ripple"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="工具" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:textSize="15sp"
+                android:clickable="true"
+                android:background="@drawable/white_bg_blue_ripple"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+        </LinearLayout>
 
 
     </LinearLayout>
