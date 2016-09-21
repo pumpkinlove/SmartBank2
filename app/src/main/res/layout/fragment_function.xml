@@ -130,8 +130,43 @@
             android:layout_width="match_parent"
             android:layout_height="1px"/>
 
+        <View
+            android:background="@null"
+            android:layout_weight="0.15"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
         <LinearLayout
-            android:layout_weight="1"
+            android:id="@+id/ll_new_doing"
+            android:orientation="horizontal"
+            android:layout_weight="0.3"
+            android:background="@drawable/white_bg_gray_ripple"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:layout_weight="5"
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:clickable="true"
+                android:layout_weight="1"
+                android:id="@+id/iv_add_doing"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@android:drawable/ic_menu_camera" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="0.7"
             android:layout_width="match_parent"
             android:layout_height="0dp">
 

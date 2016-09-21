@@ -23,4 +23,9 @@
         <item name="android:drawablePadding">15dp</item>
     </style>
 
+    <style name="popwin_anim_style">
+        <item name="android:windowEnterAnimation">@anim/ppwindow_show_anim</item>
+        <item name="android:windowExitAnimation">@anim/ppwindow_hide_anim</item>
+    </style>
+
 </resources>
