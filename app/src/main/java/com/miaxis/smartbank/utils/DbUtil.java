@@ -11,9 +11,9 @@ import java.io.File;
  */
 public class DbUtil {
     static DbManager.DaoConfig daoConfig;
-    public static DbManager.DaoConfig getDaoConfig(){
+    public static DbManager.DaoConfig getDaoConfig() {
         File file = new File(Environment.getExternalStorageDirectory().getPath());
-        if(daoConfig == null){
+        if(daoConfig == null) {
             daoConfig = new DbManager.DaoConfig()
                     .setDbName("SmartBank2.db")
                     .setDbDir(file)
@@ -28,5 +28,7 @@ public class DbUtil {
         }
         return daoConfig;
     }
+
+
 
 }

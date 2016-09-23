@@ -100,6 +100,7 @@
                 android:layout_height="match_parent"/>
 
             <TextView
+                android:id="@+id/func_tools"
                 android:textSize="15sp"
                 android:clickable="true"
                 android:background="@drawable/white_bg_blue_ripple"
@@ -132,9 +133,8 @@
 
         <View
             android:background="@null"
-            android:layout_weight="0.15"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="10dp"/>
 
         <View
             android:background="@color/gray_light"
@@ -144,18 +144,25 @@
         <LinearLayout
             android:id="@+id/ll_new_doing"
             android:orientation="horizontal"
-            android:layout_weight="0.3"
             android:background="@drawable/white_bg_gray_ripple"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="50dp">
+
+            <View
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
 
             <TextView
-                android:layout_weight="5"
+                android:textColor="@color/gray_dark"
+                android:layout_weight="7"
                 android:gravity="center_vertical"
                 android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="点击记录网点活动" />
 
             <ImageView
+                android:padding="3dp"
                 android:clickable="true"
                 android:layout_weight="1"
                 android:id="@+id/iv_add_doing"

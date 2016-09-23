@@ -81,20 +81,18 @@ public class MainActivity extends BaseActivity {
 
     private void initTabLayout(){
 
-        String[] titles = {"通知","观察","功能","我"};
-
         List<Drawable> drawableList = new ArrayList<>();
         Drawable tab_drawable = getResources().getDrawable(R.drawable.tab1_n);
-        tab_drawable.setTint(getResources().getColor(R.color.gray_dark));
+        tab_drawable.setTint(getResources().getColor(R.color.white));
         drawableList.add(tab_drawable);
         tab_drawable = getResources().getDrawable(R.drawable.tab2_n);
-        tab_drawable.setTint(getResources().getColor(R.color.gray_dark));
+        tab_drawable.setTint(getResources().getColor(R.color.white));
         drawableList.add(tab_drawable);
         tab_drawable = getResources().getDrawable(R.drawable.tab3_n);
-        tab_drawable.setTint(getResources().getColor(R.color.gray_dark));
+        tab_drawable.setTint(getResources().getColor(R.color.white));
         drawableList.add(tab_drawable);
         tab_drawable = getResources().getDrawable(R.drawable.tab4_n);
-        tab_drawable.setTint(getResources().getColor(R.color.gray_dark));
+        tab_drawable.setTint(getResources().getColor(R.color.white));
         drawableList.add(tab_drawable);
 
         for(int i=0; i< tl_main.getTabCount(); i++){

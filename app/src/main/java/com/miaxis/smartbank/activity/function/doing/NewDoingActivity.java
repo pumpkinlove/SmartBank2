@@ -1,4 +1,4 @@
-package com.miaxis.smartbank.activity.doing;
+package com.miaxis.smartbank.activity.function.doing;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -78,7 +78,7 @@ public class NewDoingActivity extends BaseActivity {
 
     private BottomMenu bottomMenu;
 
-    private boolean flag = true;
+    private boolean flag = true;            //true 拍照  false从相册中选取
 
     private View.OnClickListener menuListener = new View.OnClickListener() {
         @Override
@@ -86,11 +86,13 @@ public class NewDoingActivity extends BaseActivity {
             switch (view.getId()) {
                 case R.id.btn_menu_1:
                     flag = true;
+                    bottomMenu.popupWindow.dismiss();
                     Intent inttPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(inttPhoto, photoNum + 1);
                     break;
                 case R.id.btn_menu_2:
                     flag = false;
+                    bottomMenu.popupWindow.dismiss();
                     Intent intent = new Intent(
                             Intent.ACTION_PICK,
                             android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -139,8 +141,6 @@ public class NewDoingActivity extends BaseActivity {
         bottomMenu.show();
 
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

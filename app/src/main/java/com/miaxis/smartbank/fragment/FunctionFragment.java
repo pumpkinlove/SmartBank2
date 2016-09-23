@@ -7,17 +7,23 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.miaxis.smartbank.R;
-import com.miaxis.smartbank.activity.doing.NewDoingActivity;
+import com.miaxis.smartbank.activity.function.doing.NewDoingActivity;
+import com.miaxis.smartbank.activity.function.tool.ToolsActivity;
 
 import org.xutils.view.annotation.Event;
+import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FunctionFragment extends Fragment {
+
+    @ViewInject(R.id.tv_middle)
+    private TextView tvMiddle;
 
     public FunctionFragment() {
         // Required empty public constructor
@@ -29,7 +35,12 @@ public class FunctionFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_function, container, false);
         x.view().inject(this, v);
+        initView();
         return v;
+    }
+
+    private void initView() {
+        tvMiddle.setText("功能");
     }
 
     @Event(R.id.ll_new_doing)
@@ -37,4 +48,8 @@ public class FunctionFragment extends Fragment {
         startActivity(new Intent(getActivity(), NewDoingActivity.class));
     }
 
+    @Event(R.id.func_tools)
+    private void tools(View view) {
+        startActivity(new Intent(getActivity(), ToolsActivity.class));
+    }
 }

@@ -1,6 +1,7 @@
 package com.miaxis.smartbank.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.miaxis.smartbank.R;
+import com.miaxis.smartbank.activity.home.ConfigActivity;
 
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -48,5 +51,9 @@ public class HomeFragment extends Fragment {
         tv_middle.setText("我");
     }
 
+    @Event(R.id.ll_config)
+    private void config(View view) {
+        startActivity(new Intent(getActivity(), ConfigActivity.class));
+    }
 
 }
