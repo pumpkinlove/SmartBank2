@@ -128,7 +128,7 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener {
         LinearLayout dotLayout = (LinearLayout)findViewById(R.id.dotLayout);
         dotLayout.removeAllViews();
 
-        // 热点个数与图片特殊相等
+        // 热点个数与图片个数相等
         for (int i = 0; i < imageUrls.length; i++) {
             ImageView view =  new ImageView(context);
             view.setTag(imageUrls[i]);
@@ -312,7 +312,7 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener {
         public void run() {
             // TODO Auto-generated method stub
             synchronized (viewPager) {
-                currentItem = (currentItem+1)%imageViewsList.size();
+                currentItem = (currentItem+1) % imageViewsList.size();
                 handler.obtainMessage().sendToTarget();
             }
         }

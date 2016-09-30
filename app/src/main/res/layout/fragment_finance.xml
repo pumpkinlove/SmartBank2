@@ -4,10 +4,340 @@
     android:layout_height="match_parent"
     tools:context="com.miaxis.smartbank.fragment.tools.FinanceFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_marginTop="10dp"
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+        <LinearLayout
+            android:clickable="true"
+            android:background="@drawable/white_bg_blue_ripple"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:background="@drawable/white_bg_blue_ripple"
+                android:clickable="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/dark"
+                android:textSize="16sp"
+                android:paddingLeft="15dp"
+                android:gravity="center_vertical"
+                android:text="投资本金"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <EditText
+                    android:background="@drawable/white_bg_gray_ripple"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:textColor="@color/blue_band_dark2"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:digits="0123456789."
+                    android:inputType="numberDecimal"
+                    android:layout_height="match_parent"
+                    android:id="@+id/et_money"
+                    android:paddingStart="25dp" />
+
+                <TextView
+                    android:text="元"
+                    android:textSize="18sp"
+                    android:textColor="@color/dark"
+                    android:gravity="center"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+        <LinearLayout
+            android:clickable="true"
+            android:background="@drawable/white_bg_blue_ripple"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:background="@drawable/white_bg_blue_ripple"
+                android:clickable="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/dark"
+                android:textSize="16sp"
+                android:paddingLeft="15dp"
+                android:gravity="center_vertical"
+                android:text="投资年限"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <EditText
+                    android:background="@drawable/white_bg_gray_ripple"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:textColor="@color/blue_band_dark2"
+                    android:digits="0123456789."
+                    android:inputType="numberDecimal"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/et_year"
+                    android:paddingStart="25dp" />
+
+                <TextView
+                    android:text="年"
+                    android:textSize="18sp"
+                    android:textColor="@color/dark"
+                    android:gravity="center"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+        <LinearLayout
+            android:clickable="true"
+            android:background="@drawable/white_bg_blue_ripple"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:background="@drawable/white_bg_blue_ripple"
+                android:clickable="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/dark"
+                android:textSize="16sp"
+                android:paddingLeft="15dp"
+                android:gravity="center_vertical"
+                android:text="预期投资收益率"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <EditText
+                    android:background="@drawable/white_bg_gray_ripple"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:textColor="@color/blue_band_dark2"
+                    android:layout_weight="1"
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789."
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/et_rate"
+                    android:paddingStart="25dp" />
+
+                <TextView
+                    android:text="%"
+                    android:textSize="18sp"
+                    android:textColor="@color/dark"
+                    android:gravity="center"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+        <LinearLayout
+            android:clickable="true"
+            android:background="@drawable/white_bg_blue_ripple"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:background="@drawable/white_bg_blue_ripple"
+                android:clickable="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/dark"
+                android:textSize="16sp"
+                android:paddingLeft="15dp"
+                android:gravity="center_vertical"
+                android:text="收益"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:textColor="@color/green_dark"
+                    android:layout_weight="1"
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789."
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tv_earn"
+                    android:paddingStart="25dp" />
+
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/dark"
+                    android:gravity="center"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:text="元" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+        <LinearLayout
+            android:clickable="true"
+            android:background="@drawable/white_bg_blue_ripple"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:background="@drawable/white_bg_blue_ripple"
+                android:clickable="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/dark"
+                android:textSize="16sp"
+                android:paddingLeft="15dp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="合计" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:textColor="@color/green_dark"
+                    android:layout_weight="1"
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789."
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tv_total"
+                    android:paddingStart="25dp" />
+
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/dark"
+                    android:gravity="center"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:text="元" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+        <LinearLayout
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="80dp">
+
+            <TextView
+                android:clickable="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/dark_bg_light_ripple"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="清空"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:id="@+id/tv_clear" />
+
+            <TextView
+                android:clickable="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/band_stroke_bg"
+                android:gravity="center"
+                android:text="计算"
+                android:textSize="18sp"
+                android:textColor="@color/blue_band_dark"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:id="@+id/tv_calculate" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
 </FrameLayout>

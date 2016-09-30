@@ -1,6 +1,5 @@
 package com.miaxis.smartbank.activity.function.tool;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -75,13 +74,13 @@ public class ToolsActivity extends BaseActivity {
         toolViewPager.setOffscreenPageLimit(10);
     }
 
-    private void initTabLayout(){
+    private void initTabLayout() {
 
         String[] titles = {"理财计算器","贷款计算器"};
 
-        for(int i=0; i< toolTabLayout.getTabCount(); i++){
+        for (int i=0; i< toolTabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = toolTabLayout.getTabAt(i);
-            if(tab != null){
+            if (tab != null) {
                 tab.setText(titles[i]);
             }
         }
