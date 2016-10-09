@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_function"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.miaxis.smartbank.fragment.FunctionFragment">
@@ -52,7 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="网点活动"
-                android:id="@+id/tv_bank_event" />
+                android:id="@+id/tv_func_bank_doing" />
 
             <View
                 android:background="@color/gray_light"
@@ -68,7 +69,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="客流量分析"
-                android:id="@+id/tv_analyze" />
+                android:id="@+id/tv_func_analyze" />
 
         </LinearLayout>
 
@@ -92,7 +93,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="理财产品"
-                android:id="@+id/tv_production" />
+                android:id="@+id/tv_func_production" />
 
             <View
                 android:background="@color/gray_light"
@@ -100,7 +101,7 @@
                 android:layout_height="match_parent"/>
 
             <TextView
-                android:id="@+id/func_tools"
+                android:id="@+id/tv_func_tools"
                 android:textSize="15sp"
                 android:clickable="true"
                 android:background="@drawable/white_bg_blue_ripple"

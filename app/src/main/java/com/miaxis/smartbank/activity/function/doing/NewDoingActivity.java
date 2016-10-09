@@ -20,11 +20,14 @@ import com.miaxis.smartbank.utils.ImageUtil;
 import com.miaxis.smartbank.view.BottomMenu;
 
 import org.xutils.common.util.DensityUtil;
+import org.xutils.http.RequestParams;
 import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
+
+import java.io.File;
 
 @ContentView(R.layout.activity_new_doing)
 public class NewDoingActivity extends BaseActivity {
@@ -242,5 +245,14 @@ public class NewDoingActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+
+    @Event(R.id.tv_right)
+    private void upload(View view) {
+        String url = "";
+        RequestParams params = new RequestParams(url);
+        params.setMultipart(true);
+        params.addBodyParameter("photo0", new File("/sdcard/"));
+
     }
 }

@@ -24,7 +24,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        
     }
 
     @Override
