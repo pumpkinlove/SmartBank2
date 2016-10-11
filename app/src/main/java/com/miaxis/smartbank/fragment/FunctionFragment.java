@@ -14,6 +14,7 @@ import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.activity.function.CiipsActivity;
 import com.miaxis.smartbank.activity.function.doing.BankDoingActivity;
 import com.miaxis.smartbank.activity.function.doing.NewDoingActivity;
+import com.miaxis.smartbank.activity.function.product.ProductionListActivity;
 import com.miaxis.smartbank.activity.function.tool.ToolsActivity;
 
 import org.xutils.view.annotation.Event;
@@ -64,5 +65,10 @@ public class FunctionFragment extends Fragment {
     @Event(R.id.tv_func_bank_doing)
     private void bankDoing(View view) {
         startActivity(new Intent(getActivity(), BankDoingActivity.class));
+    }
+
+    @Event(R.id.tv_func_production)
+    private void production(View view) {
+        startActivity(new Intent(getActivity(), ProductionListActivity.class));
     }
 }

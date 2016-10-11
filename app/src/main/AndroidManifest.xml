@@ -59,7 +59,8 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".activity.function.tool.ToolsActivity" />
         <activity android:name=".activity.function.CiipsActivity" />
-        <activity android:name=".activity.function.doing.BankDoingActivity"></activity>
+        <activity android:name=".activity.function.doing.BankDoingActivity" />
+        <activity android:name=".activity.function.product.ProductionListActivity"></activity>
     </application>
 
 </manifest>
