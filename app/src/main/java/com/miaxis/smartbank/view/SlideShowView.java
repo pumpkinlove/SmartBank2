@@ -18,10 +18,8 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
 import com.miaxis.smartbank.R;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+
+import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 public class SlideShowView extends FrameLayout implements View.OnClickListener {
 
     // 使用universal-image-loader插件读取网络图片，需要工程导入universal-image-loader-1.8.6-with-sources.jar
-    private ImageLoader imageLoader = ImageLoader.getInstance();
+//    private ImageLoader imageLoader = ImageLoader.getInstance();
 
     //轮播图图片数量
     private final static int IMAGE_COUNT = 5;
@@ -85,7 +83,7 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener {
         super(context, attrs, defStyle);
         this.context = context;
 
-        initImageLoader(context);
+//        initImageLoader(context);
 
         initData();
         if(isAutoPlay){
@@ -206,8 +204,8 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener {
         public Object instantiateItem(View container, int position) {
             ImageView imageView = imageViewsList.get(position);
 
-            imageLoader.displayImage(imageView.getTag() + "", imageView);
-
+//            imageLoader.displayImage(imageView.getTag() + "", imageView);
+            x.image().bind(imageView, imageView.getTag() + "");
             ((ViewPager)container).addView(imageViewsList.get(position));
             return imageViewsList.get(position);
         }
@@ -348,10 +346,10 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener {
                 // 这里一般调用服务端接口获取一组轮播图片，下面是从百度找的几个图片
 
                 imageUrls = new String[]{
-                        "http://image.zcool.com.cn/56/35/1303967876491.jpg",
-                        "http://image.zcool.com.cn/59/54/m_1303967870670.jpg",
-                        "http://image.zcool.com.cn/47/19/1280115949992.jpg",
-                        "http://image.zcool.com.cn/59/11/m_1303967844788.jpg"
+                        "http://img2.imgtn.bdimg.com/it/u=2228090847,3776253819&fm=11&gp=0.jpg",
+                        "http://img3.imgtn.bdimg.com/it/u=1226791657,2480826386&fm=11&gp=0.jpg",
+                        "http://img5.imgtn.bdimg.com/it/u=2088999013,705617920&fm=23&gp=0.jpg",
+                        "http://img5.imgtn.bdimg.com/it/u=2869908121,3732538436&fm=21&gp=0.jpg"
                 };
                 return true;
             } catch (Exception e) {
@@ -374,18 +372,18 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener {
      *
      * @param context
      */
-    public static void initImageLoader(Context context) {
-        // This configuration tuning is custom. You can tune every option, you
-        // may tune some of them,
-        // or you can create default configuration by
-        // ImageLoaderConfiguration.createDefault(this);
-        // method.
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).threadPriority(Thread.NORM_PRIORITY - 2).denyCacheImageMultipleSizesInMemory().discCacheFileNameGenerator(new Md5FileNameGenerator()).tasksProcessingOrder(QueueProcessingType.LIFO).writeDebugLogs() // Remove
-                // for
-                // release
-                // app
-                .build();
-        // Initialize ImageLoader with configuration.
-        ImageLoader.getInstance().init(config);
-    }
+//    public static void initImageLoader(Context context) {
+//        // This configuration tuning is custom. You can tune every option, you
+//        // may tune some of them,
+//        // or you can create default configuration by
+//        // ImageLoaderConfiguration.createDefault(this);
+//        // method.
+//        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).threadPriority(Thread.NORM_PRIORITY - 2).denyCacheImageMultipleSizesInMemory().discCacheFileNameGenerator(new Md5FileNameGenerator()).tasksProcessingOrder(QueueProcessingType.LIFO).writeDebugLogs() // Remove
+//                // for
+//                // release
+//                // app
+//                .build();
+//        // Initialize ImageLoader with configuration.
+//        ImageLoader.getInstance().init(config);
+//    }
 }

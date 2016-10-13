@@ -57,10 +57,13 @@
         <activity
             android:name=".activity.home.ConfigActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".activity.function.tool.ToolsActivity" />
+        <activity
+            android:name=".activity.function.tool.ToolsActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".activity.function.CiipsActivity" />
         <activity android:name=".activity.function.doing.BankDoingActivity" />
-        <activity android:name=".activity.function.product.ProductionListActivity"></activity>
+        <activity android:name=".activity.function.product.ProductionListActivity" />
+        <activity android:name=".activity.function.analyze.AnalyzeActivity"></activity>
     </application>
 
 </manifest>

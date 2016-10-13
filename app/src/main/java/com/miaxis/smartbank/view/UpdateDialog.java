@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.miaxis.smartbank.R;
+import com.miaxis.smartbank.domain.Version;
 
 import org.xutils.x;
 
@@ -20,9 +21,11 @@ import org.xutils.x;
  */
 public class UpdateDialog extends DialogFragment {
 
+    private Version curVersion;
+    private Version lastVersion;
+
     @Override
     public void onStart() {
-        Log.e("------------","onStart");
         super.onStart();
         Dialog dialog = getDialog();
         if (dialog != null) {
@@ -34,18 +37,28 @@ public class UpdateDialog extends DialogFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.e("------------","onCreate");
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.e("------------","onCreateView");
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_update, container);
         x.view().inject(this, view);
 
         return view;
+    }
+
+    public void setCurVersion(Version curVersion) {
+        this.curVersion = curVersion;
+    }
+
+    public void setLastVersion(Version lastVersion) {
+        this.lastVersion = lastVersion;
+    }
+
+    private void cancelClick(View view) {
+        dismiss();
     }
 }

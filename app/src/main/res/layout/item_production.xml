@@ -4,25 +4,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/white_bg_gray_ripple"
-    android:elevation="5dp">
+    android:background="@color/gray_bg">
 
-    <TextView
-        android:id="@+id/expand_button"
-        style="@style/TextAppearance.AppCompat.Medium"
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gray_bg_dark_ripple"
-        android:elevation="6dp"
-        android:foreground="?selectableItemBackground"
-        android:padding="16dp" />
-
-    <net.cachapa.expandablelayout.ExpandableLayout
-        android:id="@+id/expandable_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:el_duration="300"
-        app:el_expanded="false">
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
 
         <LinearLayout
             android:orientation="vertical"
@@ -30,28 +19,83 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/production_photo"
+                android:id="@+id/iv_production_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/tv_describe"
-                android:padding="10dp"
-                android:textSize="16sp"
-                android:gravity="center_vertical|start"
+            <View
+                android:background="@color/gray_light"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="1px"/>
 
             <TextView
-                android:id="@+id/tv_term"
+                android:background="@drawable/white_bg_gray_ripple"
+                android:clickable="true"
+                android:text="产品描述"
                 android:padding="10dp"
                 android:textSize="16sp"
                 android:gravity="center_vertical|start"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_eb_describe" />
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/el_describe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:el_duration="300"
+                app:el_expanded="false">
+
+                <TextView
+                    android:background="@color/gray_bg"
+                    android:id="@+id/tv_describe"
+                    android:padding="10dp"
+                    android:textSize="14sp"
+                    android:gravity="center_vertical|start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="match_parent"
+                android:layout_height="1px"/>
+
+            <TextView
+                android:background="@drawable/white_bg_gray_ripple"
+                android:clickable="true"
+                android:text="营销术语"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:gravity="center_vertical|start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_eb_term" />
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/el_term"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:el_duration="300"
+                app:el_expanded="false">
+
+                <TextView
+                    android:background="@color/gray_bg"
+                    android:id="@+id/tv_term"
+                    android:padding="10dp"
+                    android:textSize="14sp"
+                    android:gravity="center_vertical|start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
 
         </LinearLayout>
-
-    </net.cachapa.expandablelayout.ExpandableLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

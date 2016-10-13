@@ -61,7 +61,7 @@ public class ToolsActivity extends BaseActivity {
         fragmentList.add(financeFragment);
         fragmentList.add(loanFragment);
 
-        adapter = new MyFragmentAdapter(getSupportFragmentManager(),fragmentList);
+        adapter = new MyFragmentAdapter(getSupportFragmentManager(), fragmentList);
     }
 
     @Override

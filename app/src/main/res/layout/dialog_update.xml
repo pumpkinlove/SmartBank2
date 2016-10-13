@@ -7,91 +7,11 @@
     android:elevation="5dp">
 
     <LinearLayout
-        android:background="@color/blue_band_dark"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
-
-        <TextView
-            android:layout_marginLeft="15dp"
-            android:gravity="center_vertical"
-            android:text="更新"
-            android:textSize="14sp"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-    <View
-        android:background="@color/gray_light"
-        android:layout_width="match_parent"
-        android:layout_height="1px"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="120dp">
-
-        <ProgressBar
-            style="?android:attr/progressBarStyle"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:textSize="16sp"
-            android:textColor="@color/dark"
-            android:text="正在检查更新..."
-            android:gravity="center"
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+        android:layout_height="35dp">
 
 
-    </LinearLayout>
 
-    <View
-        android:background="@color/gray_light"
-        android:layout_width="match_parent"
-        android:layout_height="1px"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-
-        <View
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"/>
-
-        <View
-            android:background="@color/gray_light"
-            android:layout_width="1px"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:background="@drawable/white_bg_blue_ripple"
-            android:textColor="@color/dark"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="更新" />
-
-        <View
-            android:background="@color/gray_light"
-            android:layout_width="1px"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:background="@drawable/white_bg_blue_ripple"
-            android:textColor="@color/dark"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="取消" />
 
     </LinearLayout>
 

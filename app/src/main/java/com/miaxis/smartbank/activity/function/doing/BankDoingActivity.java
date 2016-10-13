@@ -1,5 +1,6 @@
 package com.miaxis.smartbank.activity.function.doing;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import com.miaxis.smartbank.adapter.BankDoingAdapter;
 import com.miaxis.smartbank.domain.BankDoing;
 import com.miaxis.smartbank.utils.DateUtil;
 import com.miaxis.smartbank.utils.XUtil;
+import com.miaxis.smartbank.view.ImageDialog;
 import com.miaxis.smartbank.view.XListView;
 
 import org.xutils.common.Callback;
@@ -47,6 +49,8 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
 
     private BankDoingAdapter adapter;
 
+    private ImageDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,13 +66,14 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
 
         bankDoingList = new ArrayList<>();
         BankDoing doing = new BankDoing();
+        dialog = new ImageDialog();
 
         doing.setBankName("测试网点");
         doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
         doing.setOpdate(DateUtil.toMonthDay(new Date()));
         doing.setOptime(DateUtil.toHourMinString(new Date()));
 
-        doing.setPhoto0("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
+        doing.setPhoto0("http://hi.csdn.net/attachment/201110/30/0_1319976939pkgr.gif");
         doing.setPhoto1("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
         doing.setPhoto2("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
         doing.setPhoto3("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
@@ -79,8 +84,54 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
         doing.setPhoto8("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
 
         bankDoingList.add(doing);
+        doing = new BankDoing();
+        doing.setBankName("测试网点");
+        doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
+        doing.setOpdate(DateUtil.toMonthDay(new Date()));
+        doing.setOptime(DateUtil.toHourMinString(new Date()));
+
+        doing.setPhoto0("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
+
+        bankDoingList.add(doing);
+        doing = new BankDoing();
+        doing.setBankName("测试网点");
+        doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
+        doing.setOpdate(DateUtil.toMonthDay(new Date()));
+        doing.setOptime(DateUtil.toHourMinString(new Date()));
+
+        doing.setPhoto0("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
+        doing.setPhoto1("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
+
+        bankDoingList.add(doing);
+        doing = new BankDoing();
+        doing.setBankName("测试网点");
+        doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
+        doing.setOpdate(DateUtil.toMonthDay(new Date()));
+        doing.setOptime(DateUtil.toHourMinString(new Date()));
+
+        doing.setPhoto0("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
+        doing.setPhoto1("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
+        doing.setPhoto2("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
+
+        bankDoingList.add(doing);
+        doing = new BankDoing();
+        doing.setBankName("测试网点");
+        doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
+        doing.setOpdate(DateUtil.toMonthDay(new Date()));
+        doing.setOptime(DateUtil.toHourMinString(new Date()));
+
+        doing.setPhoto0("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
+
+        bankDoingList.add(doing);
 
         adapter = new BankDoingAdapter(bankDoingList, this);
+        adapter.setPhotoClickListener(new BankDoingAdapter.PhotoClickListener() {
+            @Override
+            public void onPhotoClick(String url) {
+                dialog.setUrl(url);
+                dialog.show(getFragmentManager(), "");
+            }
+        });
 
         xlvBankDoing.setAdapter(adapter);
 
@@ -92,6 +143,8 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
         tvLeft.setVisibility(View.VISIBLE);
         tvMiddle.setText("网点活动");
         tvRight.setVisibility(View.VISIBLE);
+        tvRight.setText(" + ");
+        tvRight.setTextSize(25.0f);
 
         xlvBankDoing.setPullLoadEnable(true);
         xlvBankDoing.setPullRefreshEnable(true);
@@ -147,5 +200,10 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
     @Event(R.id.tv_left)
     private void goBack(View view) {
         finish();
+    }
+
+    @Event(R.id.tv_right)
+    private void newDoingClick(View view) {
+        startActivityForResult(new Intent(this, NewDoingActivity.class), 1);
     }
 }

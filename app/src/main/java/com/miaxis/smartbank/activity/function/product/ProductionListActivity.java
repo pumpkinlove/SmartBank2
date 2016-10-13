@@ -47,9 +47,24 @@ public class ProductionListActivity extends BaseActivity {
 
         productionList = new ArrayList<>();
         Production p = new Production();
-        p.setName("神奇理财");
+        p.setName("神奇理财1");
+        p.setPicUrl("http://img2.imgtn.bdimg.com/it/u=2228090847,3776253819&fm=11&gp=0.jpg");
+        p.setDescribe("神奇的理财产品");
+        p.setTerm("这个理财产品好啊");
         productionList.add(p);
-        adapter = new ProductionAdapter(productionList, this, rvProduction);
+        Production p2 = new Production();
+        p2.setName("神奇理财2");
+        p2.setPicUrl("http://img3.imgtn.bdimg.com/it/u=1226791657,2480826386&fm=11&gp=0.jpg");
+        p2.setDescribe("神奇的理财产品");
+        p2.setTerm("这个理财产品好啊");
+        productionList.add(p2);
+        Production p3 = new Production();
+        p3.setName("神奇理财3");
+        p3.setPicUrl("http://img5.imgtn.bdimg.com/it/u=2088999013,705617920&fm=23&gp=0.jpg");
+        p3.setDescribe("神奇的理财产品");
+        p3.setTerm("这个理财产品好啊");
+        productionList.add(p3);
+        adapter = new ProductionAdapter(productionList, rvProduction);
     }
 
     @Override

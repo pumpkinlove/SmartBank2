@@ -1,10 +1,10 @@
 package com.miaxis.smartbank.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miaxis.smartbank.R;
@@ -12,7 +12,10 @@ import com.miaxis.smartbank.domain.Production;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
+import org.xutils.image.ImageOptions;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 import java.util.List;
 
@@ -20,18 +23,13 @@ import java.util.List;
  * Created by xu.nan on 2016/10/10.
  */
 public class ProductionAdapter extends RecyclerView.Adapter<ProductionAdapter.ViewHolder> {
-    private static final int UNSELECTED = -1;
 
     private RecyclerView recyclerView;
-    private int selectedItem = UNSELECTED;
 
     private List<Production> productionList;
 
-    private Context context;
-
-    public ProductionAdapter(List<Production> productionList, Context context, RecyclerView recyclerView) {
+    public ProductionAdapter(List<Production> productionList,RecyclerView recyclerView) {
         this.productionList = productionList;
-        this.context = context;
         this.recyclerView = recyclerView;
     }
 
@@ -52,47 +50,87 @@ public class ProductionAdapter extends RecyclerView.Adapter<ProductionAdapter.Vi
         return productionList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @ViewInject(R.id.expandable_layout)
-        private ExpandableLayout expandableLayout;
+        @ViewInject(R.id.el_describe)
+        private ExpandableLayout elDescribe;
+        @ViewInject(R.id.el_term)
+        private ExpandableLayout elTerm;
 
-        private TextView expandButton;
+        @ViewInject(R.id.tv_eb_describe)
+        private TextView tvEbDescribe;
+        @ViewInject(R.id.tv_eb_term)
+        private TextView tvEbTerm;
+        @ViewInject(R.id.tv_describe)
+        private TextView tvDescribe;
+        @ViewInject(R.id.tv_term)
+        private TextView tvTerm;
+        @ViewInject(R.id.iv_production_photo)
+        private ImageView ivProduction;
+
         private int position;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            x.view().inject(this, itemView);
 
-            expandableLayout = (ExpandableLayout) itemView.findViewById(R.id.expandable_layout);
-            expandButton = (TextView) itemView.findViewById(R.id.expand_button);
-
-            expandButton.setOnClickListener(this);
         }
 
         public void bind(int position) {
             this.position = position;
+            ImageOptions options = new ImageOptions.Builder()
+                    // 是否忽略GIF格式的图片
+                    .setIgnoreGif(false)
+                    // 图片缩放模式
+                    .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                    // 下载中显示的图片
+                    .setLoadingDrawableId(R.mipmap.product_default)
+                    // 下载失败显示的图片
+                    .setFailureDrawableId(R.mipmap.product_default)
+                    // 得到ImageOptions对象
+                    .build();
+            x.image().bind(ivProduction, productionList.get(position).getPicUrl(), options);
+            tvDescribe.setText(productionList.get(position).getDescribe());
+            tvTerm.setText(productionList.get(position).getTerm());
 
-            expandButton.setText(productionList.get(position).getName());
-            expandButton.setSelected(false);
-            expandableLayout.collapse(false);
+            tvEbDescribe.setSelected(false);
+            elDescribe.collapse(false);
+
+            tvEbTerm.setSelected(false);
+            elTerm.collapse(false);
 
         }
 
-        @Override
-        public void onClick(View view) {
-            ViewHolder holder = (ViewHolder) recyclerView.findViewHolderForAdapterPosition(selectedItem);
+        @Event(R.id.tv_eb_describe)
+        private void expandDescribe(View view) {
+            ViewHolder holder = (ViewHolder) recyclerView.findViewHolderForAdapterPosition(-1);
             if (holder != null) {
-                holder.expandButton.setSelected(false);
-                holder.expandableLayout.collapse();
+                holder.tvEbDescribe.setSelected(false);
+                holder.elDescribe.collapse();
+            }
+            if (!elDescribe.isExpanded()) {
+               elDescribe.expand();
+            } else {
+                elDescribe.collapse();
             }
 
-            if (position == selectedItem) {
-                selectedItem = UNSELECTED;
-            } else {
-                expandButton.setSelected(true);
-                expandableLayout.expand();
-                selectedItem = position;
-            }
         }
+
+        @Event(R.id.tv_eb_term)
+        private void expandTerm(View view) {
+            ViewHolder holder = (ViewHolder) recyclerView.findViewHolderForAdapterPosition(-1);
+            if (holder != null) {
+                holder.tvEbTerm.setSelected(false);
+                holder.elTerm.collapse();
+            }
+
+            if (!elTerm.isExpanded()) {
+                elTerm.expand();
+            } else {
+                elTerm.collapse();
+            }
+
+        }
+
     }
 }
