@@ -68,7 +68,7 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
         BankDoing doing = new BankDoing();
         dialog = new ImageDialog();
 
-        doing.setBankName("测试网点");
+        doing.setOrganname("测试网点");
         doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
         doing.setOpdate(DateUtil.toMonthDay(new Date()));
         doing.setOptime(DateUtil.toHourMinString(new Date()));
@@ -85,7 +85,7 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
 
         bankDoingList.add(doing);
         doing = new BankDoing();
-        doing.setBankName("测试网点");
+        doing.setOrganname("测试网点");
         doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
         doing.setOpdate(DateUtil.toMonthDay(new Date()));
         doing.setOptime(DateUtil.toHourMinString(new Date()));
@@ -94,7 +94,7 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
 
         bankDoingList.add(doing);
         doing = new BankDoing();
-        doing.setBankName("测试网点");
+        doing.setOrganname("测试网点");
         doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
         doing.setOpdate(DateUtil.toMonthDay(new Date()));
         doing.setOptime(DateUtil.toHourMinString(new Date()));
@@ -104,7 +104,7 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
 
         bankDoingList.add(doing);
         doing = new BankDoing();
-        doing.setBankName("测试网点");
+        doing.setOrganname("测试网点");
         doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
         doing.setOpdate(DateUtil.toMonthDay(new Date()));
         doing.setOptime(DateUtil.toHourMinString(new Date()));
@@ -115,7 +115,7 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
 
         bankDoingList.add(doing);
         doing = new BankDoing();
-        doing.setBankName("测试网点");
+        doing.setOrganname("测试网点");
         doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
         doing.setOpdate(DateUtil.toMonthDay(new Date()));
         doing.setOptime(DateUtil.toHourMinString(new Date()));

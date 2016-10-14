@@ -1,12 +1,16 @@
 package com.miaxis.smartbank.utils;
 
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
 import com.miaxis.smartbank.domain.Version;
+import com.miaxis.smartbank.view.AlertDialog;
 
 /**
  * Created by xu.nan on 2016/8/17.
@@ -31,5 +35,12 @@ public class CommonUtil {
             return null;
         }
     }
+
+    public static void alert(FragmentManager manager, String content) {
+        AlertDialog dialog = new AlertDialog();
+        dialog.setAdContent(content);
+        dialog.show(manager, "ALERT");
+    }
+
 
 }

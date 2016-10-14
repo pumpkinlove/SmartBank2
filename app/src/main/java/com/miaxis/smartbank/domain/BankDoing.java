@@ -12,8 +12,8 @@ public class BankDoing implements Serializable {
     private String content;
     private String opdate;
     private String optime;
-    private String bankCode;
-    private String bankName;
+    private String organid;
+    private String organname;
 
     private String photo0;
     private String photo1;
@@ -65,20 +65,20 @@ public class BankDoing implements Serializable {
         this.optime = optime;
     }
 
-    public String getBankCode() {
-        return bankCode;
+    public String getOrganid() {
+        return organid;
     }
 
-    public void setBankCode(String bankCode) {
-        this.bankCode = bankCode;
+    public void setOrganid(String organid) {
+        this.organid = organid;
     }
 
-    public String getBankName() {
-        return bankName;
+    public String getOrganname() {
+        return organname;
     }
 
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
+    public void setOrganname(String organname) {
+        this.organname = organname;
     }
 
     public String getPhoto0() {

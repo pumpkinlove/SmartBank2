@@ -70,5 +70,4 @@ public class ImageDialog extends DialogFragment {
         return view;
     }
 
-
 }

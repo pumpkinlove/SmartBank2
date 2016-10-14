@@ -90,6 +90,8 @@
             android:layout_height="50dp">
 
             <TextView
+                android:clickable="true"
+                android:id="@+id/tv_update"
                 style="@style/tv_setting"
                 android:drawableLeft="@mipmap/user_help"
                 android:text="更新"

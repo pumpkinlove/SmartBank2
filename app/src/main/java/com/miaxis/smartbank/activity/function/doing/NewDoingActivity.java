@@ -6,19 +6,29 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.activity.BaseActivity;
+import com.miaxis.smartbank.domain.BankDoing;
+import com.miaxis.smartbank.utils.CommonUtil;
+import com.miaxis.smartbank.utils.Constant;
 import com.miaxis.smartbank.utils.ImageUtil;
+import com.miaxis.smartbank.utils.XUtil;
 import com.miaxis.smartbank.view.BottomMenu;
 
+import org.xutils.common.Callback;
 import org.xutils.common.util.DensityUtil;
 import org.xutils.http.RequestParams;
 import org.xutils.image.ImageOptions;
@@ -28,6 +38,8 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 @ContentView(R.layout.activity_new_doing)
 public class NewDoingActivity extends BaseActivity {
@@ -77,11 +89,16 @@ public class NewDoingActivity extends BaseActivity {
     @ViewInject(R.id.tv_right)
     private TextView tvRight;
 
+    @ViewInject(R.id.tv_content)
+    private TextView tvContent;
+
     private int photoNum;
 
     private BottomMenu bottomMenu;
 
     private boolean flag = true;            //true 拍照  false从相册中选取
+
+    private BankDoing bankDoing;
 
     private View.OnClickListener menuListener = new View.OnClickListener() {
         @Override
@@ -120,6 +137,7 @@ public class NewDoingActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        bankDoing = new BankDoing();
         bottomMenu = new BottomMenu(this, menuListener);
     }
 
@@ -247,12 +265,75 @@ public class NewDoingActivity extends BaseActivity {
         }
     }
 
-    @Event(R.id.tv_right)
     private void upload(View view) {
+        bankDoing.setContent(tvContent.getText().toString());
+
         String url = "";
-        RequestParams params = new RequestParams(url);
-        params.setMultipart(true);
-        params.addBodyParameter("photo0", new File("/sdcard/"));
+
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("bankDoing", bankDoing);
+
+        XUtil.Post(url, params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
 
     }
+
+    @Event(R.id.tv_right)
+    private void uploadPhoto(View view) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("uploadify", new File(Environment.getExternalStorageDirectory().getPath() + "/11111.jpg"));
+        String url = "http://192.168.5.96:8080/" + Constant.PROJECT_NAME + "/" + Constant.UPLOAD_PHOTO;
+        XUtil.UpLoadFile(url, params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                JsonParser parser = new JsonParser();
+                JsonElement element = parser.parse(result);
+                JsonObject o = element.getAsJsonObject();
+
+                try {
+
+                } catch (Exception e) {
+
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                CommonUtil.alert(getFragmentManager(), "ex" + ex.getMessage());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+
+
 }

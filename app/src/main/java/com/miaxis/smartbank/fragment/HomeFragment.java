@@ -17,6 +17,7 @@ import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.activity.home.ConfigActivity;
 import com.miaxis.smartbank.domain.Version;
 import com.miaxis.smartbank.utils.CommonUtil;
+import com.miaxis.smartbank.utils.Constant;
 import com.miaxis.smartbank.utils.XUtil;
 import com.miaxis.smartbank.view.UpdateDialog;
 
@@ -76,18 +77,21 @@ public class HomeFragment extends Fragment {
         startActivity(new Intent(getActivity(), ConfigActivity.class));
     }
 
+    @Event(R.id.tv_update)
     private void checkVersion(View view){
         Log.e("---------","checkVersion");
 
         pd_check_version.show();
-        String urlDemo = "http://192.168.5.123:8080/CIIPS_A/version/lastVersion.action";
+        String urlDemo = "http://192.168.5.96:8080/"+ Constant.PROJECT_NAME + "/" + Constant.CHECK_VERSION + "?organid=1001&versiontype=03";
         XUtil.Post(urlDemo, null, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 Log.e("---------","onSuccess");
                 pd_check_version.dismiss();
                 Gson g = new Gson();
+
                 Version lastVersion = g.fromJson(result, Version.class);
+
                 try {
                     Version curVersion = CommonUtil.getCurVersion(getContext());
                     if(lastVersion.getVersionCode() > curVersion.getVersionCode() ){
@@ -103,6 +107,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 pd_check_version.dismiss();
+                CommonUtil.alert(getActivity().getFragmentManager(), "升级失败");
                 Log.e("---------","onError"+ex.getMessage());
             }
 

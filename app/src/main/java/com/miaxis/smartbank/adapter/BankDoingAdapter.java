@@ -87,7 +87,7 @@ public class BankDoingAdapter extends BaseAdapter {
             final BankDoing doing = bankDoingList.get(i);
             if (doing != null) {
 
-                holder.tvBankName.setText(doing.getBankName());
+                holder.tvBankName.setText(doing.getOrganname());
                 holder.tvContent.setText(doing.getContent());
                 ImageOptions options = new ImageOptions.Builder()
                         .setFadeIn(true)
