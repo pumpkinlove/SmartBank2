@@ -9,6 +9,7 @@ import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.activity.BaseActivity;
 import com.miaxis.smartbank.adapter.BankDoingAdapter;
 import com.miaxis.smartbank.domain.BankDoing;
+import com.miaxis.smartbank.utils.Constant;
 import com.miaxis.smartbank.utils.DateUtil;
 import com.miaxis.smartbank.utils.XUtil;
 import com.miaxis.smartbank.view.ImageDialog;
@@ -205,5 +206,13 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
     @Event(R.id.tv_right)
     private void newDoingClick(View view) {
         startActivityForResult(new Intent(this, NewDoingActivity.class), 1);
+    }
+
+    private void refreshList() {
+
+        String url = "http://192.168.5.96:8080/" + Constant.PROJECT_NAME + "/" ;
+
+
+
     }
 }

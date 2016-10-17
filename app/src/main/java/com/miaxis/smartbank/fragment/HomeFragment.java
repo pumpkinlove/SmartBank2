@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
 
                 try {
                     Version curVersion = CommonUtil.getCurVersion(getContext());
-                    if(lastVersion.getVersionCode() > curVersion.getVersionCode() ){
+                    if (lastVersion.getVersionCode() > curVersion.getVersionCode() ) {
                         updateDialog.setLastVersion(lastVersion);
                         updateDialog.show(getActivity().getFragmentManager(),"update_dialog");
                     }

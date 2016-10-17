@@ -9,9 +9,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:background="@color/white"
-        android:layout_weight="4"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="wrap_content">
 
         <EditText
             android:gravity="start"
@@ -61,7 +60,6 @@
                 android:layout_gravity="center_horizontal" />
 
             <ImageView
-                android:tint="@color/gray_light"
                 android:src="@mipmap/new_photo"
                 android:id="@+id/iv_add1"
                 android:layout_width="100dp"
@@ -70,7 +68,7 @@
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal" />
 
-        </LinearLayout>
+            </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -108,7 +106,6 @@
 
             <ImageView
                 android:visibility="gone"
-                android:tint="@color/gray_light"
                 android:src="@mipmap/new_photo"
                 android:id="@+id/iv_add2"
                 android:layout_width="100dp"
@@ -123,8 +120,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
+            android:layout_margin="15dp">
 
             <ImageView
                 android:id="@+id/iv_photo6"
@@ -155,7 +151,6 @@
 
             <ImageView
                 android:visibility="gone"
-                android:tint="@color/gray_light"
                 android:src="@mipmap/new_photo"
                 android:id="@+id/iv_add3"
                 android:layout_width="100dp"
