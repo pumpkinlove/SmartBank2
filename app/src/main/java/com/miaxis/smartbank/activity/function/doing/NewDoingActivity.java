@@ -96,8 +96,6 @@ public class NewDoingActivity extends BaseActivity {
 
     private boolean flag = true;            //true 拍照  false从相册中选取
 
-    private static final int REQUEST_PREVIEW = 12;
-
     private BankDoing bankDoing;
 
     private ImageDialog imageDialog;
@@ -211,23 +209,19 @@ public class NewDoingActivity extends BaseActivity {
                 imageDialog.setUrl(bankDoing.getPhoto8());
                 break;
         }
+        imageDialog.setButtonFlag(true);
         imageDialog.show(getFragmentManager(), "PREVIEW_BIG");
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == REQUEST_PREVIEW) {
-
-
-
-            return;
-        }
-
         if (flag) {
             if (resultCode == Activity.RESULT_OK) {
 //                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 //                previewPhotoByNum(requestCode, resultCode, bitmap);
+
+
 
                 uploadPhoto(requestCode , new File(filePathCache) );
 
@@ -382,5 +376,79 @@ public class NewDoingActivity extends BaseActivity {
             }
         });
     }
+
+    private void previewPhotoByNum(int n, int resultCode, Bitmap bitmap) {
+        switch (n) {
+            case 1:
+                if(resultCode == Activity.RESULT_OK){
+                    ivPhoto0.setImageBitmap(bitmap);
+                    ivPhoto0.setVisibility(View.VISIBLE);
+                    photoNum = 1;
+                }
+                break;
+            case 2:
+                if(resultCode == Activity.RESULT_OK){
+                    ivPhoto1.setImageBitmap(bitmap);
+                    ivPhoto1.setVisibility(View.VISIBLE);
+                    photoNum = 2;
+                }
+                break;
+            case 3:
+                if(resultCode == Activity.RESULT_OK){
+                    ivPhoto2.setImageBitmap(bitmap);
+                    ivPhoto2.setVisibility(View.VISIBLE);
+                    ivAdd1.setVisibility(View.GONE);
+                    ivAdd2.setVisibility(View.VISIBLE);
+                    photoNum = 3;
+                }
+                break;
+            case 4:
+                if(resultCode == Activity.RESULT_OK){
+                    ivPhoto3.setImageBitmap(bitmap);
+                    ivPhoto3.setVisibility(View.VISIBLE);
+                    photoNum = 4;
+                }
+                break;
+            case 5:
+                if(resultCode == Activity.RESULT_OK){
+                    ivPhoto4.setImageBitmap(bitmap);
+                    ivPhoto4.setVisibility(View.VISIBLE);
+                    photoNum = 5;
+                }
+                break;
+            case 6:
+                if(resultCode == Activity.RESULT_OK){
+                    ivPhoto5.setImageBitmap(bitmap);
+                    ivPhoto5.setVisibility(View.VISIBLE);
+                    ivAdd2.setVisibility(View.GONE);
+                    ivAdd3.setVisibility(View.VISIBLE);
+                    photoNum = 6;
+                }
+                break;
+            case 7:
+                if(resultCode == Activity.RESULT_OK){
+                    ivPhoto6.setImageBitmap(bitmap);
+                    ivPhoto6.setVisibility(View.VISIBLE);
+                    photoNum = 7;
+                }
+                break;
+            case 8:
+                if(resultCode == Activity.RESULT_OK){
+                    ivPhoto7.setImageBitmap(bitmap);
+                    ivPhoto7.setVisibility(View.VISIBLE);
+                    photoNum = 8;
+                }
+                break;
+            case 9:
+                if(resultCode == Activity.RESULT_OK){
+                    ivPhoto8.setImageBitmap(bitmap);
+                    ivPhoto8.setVisibility(View.VISIBLE);
+                    photoNum = 9;
+                    ivAdd3.setVisibility(View.GONE);
+                }
+                break;
+        }
+    }
+
 
 }

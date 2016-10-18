@@ -64,8 +64,8 @@ public class MyApplication extends Application {
             if (config == null) {
                 config = new Config();
                 config.setId(1);
-                config.setIp("120.26.51.167");
-                config.setPort("80");
+                config.setIp("192.168.5.96");
+                config.setPort("8080");
                 config.setEmqttIp("120.26.51.167");
                 config.setEmqttPort("1883");
                 config.setClientId("default" + new Date().getTime());

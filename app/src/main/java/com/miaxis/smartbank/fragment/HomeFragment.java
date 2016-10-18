@@ -87,7 +87,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSuccess(String result) {
                 Log.e("---------","onSuccess");
-                pd_check_version.dismiss();
                 Gson g = new Gson();
 
                 Version lastVersion = g.fromJson(result, Version.class);
@@ -106,19 +105,18 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                pd_check_version.dismiss();
                 CommonUtil.alert(getActivity().getFragmentManager(), "升级失败");
                 Log.e("---------","onError"+ex.getMessage());
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                pd_check_version.dismiss();
                 Log.e("---------","onCancelled");
             }
 
             @Override
             public void onFinished() {
+                pd_check_version.dismiss();
                 Log.e("---------","onFinished");
             }
         });

@@ -10,14 +10,19 @@ import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.activity.BaseActivity;
 import com.miaxis.smartbank.adapter.ProductionAdapter;
 import com.miaxis.smartbank.domain.Production;
+import com.miaxis.smartbank.utils.XUtil;
 
+import org.xutils.common.Callback;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @ContentView(R.layout.activity_production_list)
 public class ProductionListActivity extends BaseActivity {
@@ -80,4 +85,33 @@ public class ProductionListActivity extends BaseActivity {
     private void goBack(View view) {
         finish();
     }
+
+    private void downList() {
+        String url = "";
+        Map<String, Object> params = new HashMap<>();
+
+        XUtil.Post(url, params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+
+
 }

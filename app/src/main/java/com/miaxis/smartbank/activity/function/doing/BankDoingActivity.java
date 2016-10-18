@@ -78,11 +78,11 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
         doing.setPhoto1("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
         doing.setPhoto2("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
         doing.setPhoto3("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
-        doing.setPhoto4("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
+        doing.setPhoto4("http://thumb.takefoto.cn/wp-content/uploads/2016/03/201603180844279236.jpg");
         doing.setPhoto5("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
-        doing.setPhoto6("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
+        doing.setPhoto6("http://pic1.win4000.com/wallpaper/0/57eb6be0cecfa.jpg");
         doing.setPhoto7("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
-        doing.setPhoto8("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
+        doing.setPhoto8("http://pic.pp3.cn/uploads//201610/20161007012.jpg");
 
         bankDoingList.add(doing);
         doing = new BankDoing();
