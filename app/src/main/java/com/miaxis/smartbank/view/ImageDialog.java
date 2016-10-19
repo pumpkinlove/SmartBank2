@@ -3,6 +3,7 @@ package com.miaxis.smartbank.view;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,10 @@ public class ImageDialog extends DialogFragment {
         this.url = url;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
     public void setButtonFlag(boolean buttonFlag) {
         this.buttonFlag = buttonFlag;
     }
@@ -69,6 +74,10 @@ public class ImageDialog extends DialogFragment {
                 .setIgnoreGif(false)
                 .setImageScaleType(ImageView.ScaleType.FIT_CENTER)
                 .build();
+        imageView.setAdjustViewBounds(true);
+        DisplayMetrics dm = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        imageView.setMaxHeight((int) (dm.heightPixels * 0.9));
         x.image().bind(imageView, url, options);
 
         return view;
@@ -79,6 +88,11 @@ public class ImageDialog extends DialogFragment {
         if (listener != null) {
             listener.onClick(view);
         }
+    }
+
+    @Event(R.id.iv_dialog)
+    private void ivClick(View view) {
+        dismiss();
     }
 
 }

@@ -115,6 +115,7 @@ public class IndexFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageArrive(MessageArrivedEvent event) {
         Toast.makeText(getContext(), event.getTopic()+"-"+event.getMessage(), Toast.LENGTH_SHORT).show();
+        inform();
     }
 
     //发出提醒， 震动， 声音

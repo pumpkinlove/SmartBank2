@@ -29,14 +29,17 @@ import com.miaxis.smartbank.view.BottomMenu;
 import com.miaxis.smartbank.view.ImageDialog;
 
 import org.xutils.common.Callback;
+import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @ContentView(R.layout.activity_new_doing)
@@ -102,6 +105,8 @@ public class NewDoingActivity extends BaseActivity {
 
     private String filePathCache = "";
 
+    private List<String> urlList;
+
     private View.OnClickListener menuListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -109,8 +114,6 @@ public class NewDoingActivity extends BaseActivity {
                 case R.id.btn_menu_1:
                     flag = true;
                     bottomMenu.popupWindow.dismiss();
-//                    Intent inttPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    startActivityForResult(inttPhoto, photoNum + 1);
                     filePathCache = Environment.getExternalStorageDirectory() + "/bankdoing/" + new Date().getTime() + ".jpg";
                     File vFile = new File(filePathCache);
 
@@ -121,7 +124,7 @@ public class NewDoingActivity extends BaseActivity {
                     Uri uri = Uri.fromFile(vFile);
                     Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     i.putExtra(MediaStore.EXTRA_OUTPUT, uri);//
-                    startActivityForResult(i, photoNum + 1);
+                    startActivityForResult(i, photoNum = photoNum + 1);
                     break;
                 case R.id.btn_menu_2:
                     flag = false;
@@ -129,7 +132,7 @@ public class NewDoingActivity extends BaseActivity {
                     Intent intent = new Intent(
                             Intent.ACTION_PICK,
                             android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, photoNum + 1);
+                    startActivityForResult(intent, photoNum = photoNum + 1);
                     break;
                 case R.id.btn_menu_3:
                     bottomMenu.popupWindow.dismiss();
@@ -150,6 +153,8 @@ public class NewDoingActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        urlList = new ArrayList<>();
+        photoNum = 0;
         bankDoing = new BankDoing();
         bottomMenu = new BottomMenu(this, menuListener);
         imageDialog = new ImageDialog();
@@ -209,6 +214,14 @@ public class NewDoingActivity extends BaseActivity {
                 imageDialog.setUrl(bankDoing.getPhoto8());
                 break;
         }
+        imageDialog.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                urlList.remove(imageDialog.getUrl());
+                refreshList();
+                imageDialog.dismiss();
+            }
+        });
         imageDialog.setButtonFlag(true);
         imageDialog.show(getFragmentManager(), "PREVIEW_BIG");
     }
@@ -218,23 +231,15 @@ public class NewDoingActivity extends BaseActivity {
 
         if (flag) {
             if (resultCode == Activity.RESULT_OK) {
-//                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-//                previewPhotoByNum(requestCode, resultCode, bitmap);
-
-
-
                 uploadPhoto(requestCode , new File(filePathCache) );
-
             }
         } else {
             ContentResolver resolver = getContentResolver();
-            if(resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK) {
                 try {
                     // 获得图片的uri
                     Uri originalUri = data.getData();
-
                     uploadPhoto(requestCode, CommonUtil.getFileByUri(originalUri, this));
-
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -252,8 +257,8 @@ public class NewDoingActivity extends BaseActivity {
         Map<String, Object> params = new HashMap<>();
 
         params.put("content",   bankDoing.getContent());
-        params.put("opdate",    bankDoing.getOpdate());
-        params.put("optime",    bankDoing.getOptime());
+//        params.put("opdate",    bankDoing.getOpdate());
+//        params.put("optime",    bankDoing.getOptime());
         params.put("organid",   bankDoing.getOrganid());
         params.put("organname", bankDoing.getOrganname());
         params.put("photo0",    bankDoing.getPhoto0());
@@ -270,6 +275,16 @@ public class NewDoingActivity extends BaseActivity {
             @Override
             public void onSuccess(String result) {
                 Log.e("result", result);
+                JsonParser parser = new JsonParser();
+                JsonElement element = parser.parse(result);
+                JsonObject o = element.getAsJsonObject();
+                boolean success = o.get("success").getAsBoolean();
+                if (!success) {
+                    CommonUtil.alert(getFragmentManager(), "与服务器通讯失败");
+                    return;
+                }
+                setResult(RESULT_OK);
+                finish();
             }
 
             @Override
@@ -307,57 +322,8 @@ public class NewDoingActivity extends BaseActivity {
                     return;
                 }
                 String path = "http://192.168.5.96:8080/" + Constant.PROJECT_NAME + "/" +  o.get("path").getAsString() + "/" + o.get("newFileName").getAsString();
-                switch (index - 1) {
-                    case 0:
-                        bankDoing.setPhoto0(path);
-                        x.image().bind(ivPhoto0, path);
-                        ivPhoto0.setVisibility(View.VISIBLE);
-                        break;
-                    case 1:
-                        bankDoing.setPhoto1(path);
-                        x.image().bind(ivPhoto1, path);
-                        ivPhoto1.setVisibility(View.VISIBLE);
-                        break;
-                    case 2:
-                        bankDoing.setPhoto2(path);
-                        x.image().bind(ivPhoto2, path);
-                        ivPhoto2.setVisibility(View.VISIBLE);
-                        ivAdd1.setVisibility(View.GONE);
-                        break;
-                    case 3:
-                        bankDoing.setPhoto3(path);
-                        x.image().bind(ivPhoto3, path);
-                        ivPhoto3.setVisibility(View.VISIBLE);
-                        break;
-                    case 4:
-                        bankDoing.setPhoto4(path);
-                        x.image().bind(ivPhoto4, path);
-                        ivPhoto4.setVisibility(View.VISIBLE);
-                        break;
-                    case 5:
-                        bankDoing.setPhoto5(path);
-                        x.image().bind(ivPhoto5, path);
-                        ivPhoto5.setVisibility(View.VISIBLE);
-                        ivAdd2.setVisibility(View.GONE);
-                        break;
-                    case 6:
-                        bankDoing.setPhoto6(path);
-                        x.image().bind(ivPhoto6, path);
-                        ivPhoto6.setVisibility(View.VISIBLE);
-                        break;
-                    case 7:
-                        bankDoing.setPhoto7(path);
-                        x.image().bind(ivPhoto7, path);
-                        ivPhoto7.setVisibility(View.VISIBLE);
-                        break;
-                    case 8:
-                        bankDoing.setPhoto8(path);
-                        x.image().bind(ivPhoto8, path);
-                        ivPhoto8.setVisibility(View.VISIBLE);
-                        ivAdd3.setVisibility(View.GONE);
-                        break;
-                }
-                photoNum ++ ;
+                urlList.add(path);
+                refreshList();
             }
 
             @Override
@@ -377,77 +343,233 @@ public class NewDoingActivity extends BaseActivity {
         });
     }
 
-    private void previewPhotoByNum(int n, int resultCode, Bitmap bitmap) {
-        switch (n) {
+    private void refreshList() {
+
+        switch (urlList.size()) {
+            case 0:
+                bankDoing.setPhoto0(null);
+                bankDoing.setPhoto1(null);
+                bankDoing.setPhoto2(null);
+                bankDoing.setPhoto3(null);
+                bankDoing.setPhoto4(null);
+                bankDoing.setPhoto5(null);
+                bankDoing.setPhoto6(null);
+                bankDoing.setPhoto7(null);
+                bankDoing.setPhoto8(null);
+
+                break;
+
             case 1:
-                if(resultCode == Activity.RESULT_OK){
-                    ivPhoto0.setImageBitmap(bitmap);
-                    ivPhoto0.setVisibility(View.VISIBLE);
-                    photoNum = 1;
-                }
+                bankDoing.setPhoto0(urlList.get(0));
+                bankDoing.setPhoto1(null);
+                bankDoing.setPhoto2(null);
+                bankDoing.setPhoto3(null);
+                bankDoing.setPhoto4(null);
+                bankDoing.setPhoto5(null);
+                bankDoing.setPhoto6(null);
+                bankDoing.setPhoto7(null);
+                bankDoing.setPhoto8(null);
+
                 break;
             case 2:
-                if(resultCode == Activity.RESULT_OK){
-                    ivPhoto1.setImageBitmap(bitmap);
-                    ivPhoto1.setVisibility(View.VISIBLE);
-                    photoNum = 2;
-                }
+                bankDoing.setPhoto0(urlList.get(0));
+                bankDoing.setPhoto1(urlList.get(1));
+                bankDoing.setPhoto2(null);
+                bankDoing.setPhoto3(null);
+                bankDoing.setPhoto4(null);
+                bankDoing.setPhoto5(null);
+                bankDoing.setPhoto6(null);
+                bankDoing.setPhoto7(null);
+                bankDoing.setPhoto8(null);
+
                 break;
             case 3:
-                if(resultCode == Activity.RESULT_OK){
-                    ivPhoto2.setImageBitmap(bitmap);
-                    ivPhoto2.setVisibility(View.VISIBLE);
-                    ivAdd1.setVisibility(View.GONE);
-                    ivAdd2.setVisibility(View.VISIBLE);
-                    photoNum = 3;
-                }
+                bankDoing.setPhoto0(urlList.get(0));
+                bankDoing.setPhoto1(urlList.get(1));
+                bankDoing.setPhoto2(urlList.get(2));
+                bankDoing.setPhoto3(null);
+                bankDoing.setPhoto4(null);
+                bankDoing.setPhoto5(null);
+                bankDoing.setPhoto6(null);
+                bankDoing.setPhoto7(null);
+                bankDoing.setPhoto8(null);
+
                 break;
             case 4:
-                if(resultCode == Activity.RESULT_OK){
-                    ivPhoto3.setImageBitmap(bitmap);
-                    ivPhoto3.setVisibility(View.VISIBLE);
-                    photoNum = 4;
-                }
+                bankDoing.setPhoto0(urlList.get(0));
+                bankDoing.setPhoto1(urlList.get(1));
+                bankDoing.setPhoto2(urlList.get(2));
+                bankDoing.setPhoto3(urlList.get(3));
+                bankDoing.setPhoto4(null);
+                bankDoing.setPhoto5(null);
+                bankDoing.setPhoto6(null);
+                bankDoing.setPhoto7(null);
+                bankDoing.setPhoto8(null);
+
                 break;
             case 5:
-                if(resultCode == Activity.RESULT_OK){
-                    ivPhoto4.setImageBitmap(bitmap);
-                    ivPhoto4.setVisibility(View.VISIBLE);
-                    photoNum = 5;
-                }
+                bankDoing.setPhoto0(urlList.get(0));
+                bankDoing.setPhoto1(urlList.get(1));
+                bankDoing.setPhoto2(urlList.get(2));
+                bankDoing.setPhoto3(urlList.get(3));
+                bankDoing.setPhoto4(urlList.get(4));
+                bankDoing.setPhoto5(null);
+                bankDoing.setPhoto6(null);
+                bankDoing.setPhoto7(null);
+                bankDoing.setPhoto8(null);
+
                 break;
             case 6:
-                if(resultCode == Activity.RESULT_OK){
-                    ivPhoto5.setImageBitmap(bitmap);
-                    ivPhoto5.setVisibility(View.VISIBLE);
-                    ivAdd2.setVisibility(View.GONE);
-                    ivAdd3.setVisibility(View.VISIBLE);
-                    photoNum = 6;
-                }
+                bankDoing.setPhoto0(urlList.get(0));
+                bankDoing.setPhoto1(urlList.get(1));
+                bankDoing.setPhoto2(urlList.get(2));
+                bankDoing.setPhoto3(urlList.get(3));
+                bankDoing.setPhoto4(urlList.get(4));
+                bankDoing.setPhoto5(urlList.get(5));
+                bankDoing.setPhoto6(null);
+                bankDoing.setPhoto7(null);
+                bankDoing.setPhoto8(null);
+
                 break;
             case 7:
-                if(resultCode == Activity.RESULT_OK){
-                    ivPhoto6.setImageBitmap(bitmap);
-                    ivPhoto6.setVisibility(View.VISIBLE);
-                    photoNum = 7;
-                }
+                bankDoing.setPhoto0(urlList.get(0));
+                bankDoing.setPhoto1(urlList.get(1));
+                bankDoing.setPhoto2(urlList.get(2));
+                bankDoing.setPhoto3(urlList.get(3));
+                bankDoing.setPhoto4(urlList.get(4));
+                bankDoing.setPhoto5(urlList.get(5));
+                bankDoing.setPhoto6(urlList.get(6));
+                bankDoing.setPhoto7(null);
+                bankDoing.setPhoto8(null);
+
                 break;
             case 8:
-                if(resultCode == Activity.RESULT_OK){
-                    ivPhoto7.setImageBitmap(bitmap);
-                    ivPhoto7.setVisibility(View.VISIBLE);
-                    photoNum = 8;
-                }
+                bankDoing.setPhoto0(urlList.get(0));
+                bankDoing.setPhoto1(urlList.get(1));
+                bankDoing.setPhoto2(urlList.get(2));
+                bankDoing.setPhoto3(urlList.get(3));
+                bankDoing.setPhoto4(urlList.get(4));
+                bankDoing.setPhoto5(urlList.get(5));
+                bankDoing.setPhoto6(urlList.get(6));
+                bankDoing.setPhoto7(urlList.get(7));
+                bankDoing.setPhoto8(null);
+
                 break;
             case 9:
-                if(resultCode == Activity.RESULT_OK){
-                    ivPhoto8.setImageBitmap(bitmap);
-                    ivPhoto8.setVisibility(View.VISIBLE);
-                    photoNum = 9;
-                    ivAdd3.setVisibility(View.GONE);
-                }
+                bankDoing.setPhoto0(urlList.get(0));
+                bankDoing.setPhoto1(urlList.get(1));
+                bankDoing.setPhoto2(urlList.get(2));
+                bankDoing.setPhoto3(urlList.get(3));
+                bankDoing.setPhoto4(urlList.get(4));
+                bankDoing.setPhoto5(urlList.get(5));
+                bankDoing.setPhoto6(urlList.get(6));
+                bankDoing.setPhoto7(urlList.get(7));
+                bankDoing.setPhoto8(urlList.get(8));
+
                 break;
+
         }
+
+        ivAdd1.setVisibility(View.GONE);
+        ivAdd2.setVisibility(View.GONE);
+        ivAdd3.setVisibility(View.GONE);
+
+        ImageOptions options = new ImageOptions.Builder()
+                .setFadeIn(true)
+                // 是否忽略GIF格式的图片
+                .setIgnoreGif(false)
+                // 图片缩放模式
+                .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                // 下载中显示的图片
+//                        .setLoadingDrawableId(R.mipmap.product_default)
+                // 下载失败显示的图片
+//                        .setFailureDrawableId(R.mipmap.product_default)
+                // 得到ImageOptions对象
+                .build();
+
+        if (bankDoing.getPhoto0() != null && bankDoing.getPhoto0().length() > 0) {
+            x.image().bind(ivPhoto0, bankDoing.getPhoto0(), options);
+            ivPhoto0.setVisibility(View.VISIBLE);
+        } else {
+            ivPhoto0.setVisibility(View.GONE);
+            ivAdd1.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (bankDoing.getPhoto1() != null && bankDoing.getPhoto1().length() > 0) {
+            x.image().bind(ivPhoto1, bankDoing.getPhoto1(), options);
+            ivPhoto1.setVisibility(View.VISIBLE);
+        } else {
+            ivPhoto1.setVisibility(View.GONE);
+            ivAdd1.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (bankDoing.getPhoto2() != null && bankDoing.getPhoto2().length() > 0) {
+            x.image().bind(ivPhoto2, bankDoing.getPhoto2(), options);
+            ivPhoto2.setVisibility(View.VISIBLE);
+        } else {
+            ivPhoto2.setVisibility(View.GONE);
+            ivAdd1.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (bankDoing.getPhoto3() != null && bankDoing.getPhoto3().length() > 0) {
+            x.image().bind(ivPhoto3, bankDoing.getPhoto3(), options);
+            ivPhoto3.setVisibility(View.VISIBLE);
+        } else {
+            ivPhoto3.setVisibility(View.GONE);
+            ivAdd2.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (bankDoing.getPhoto4() != null && bankDoing.getPhoto4().length() > 0) {
+            x.image().bind(ivPhoto4, bankDoing.getPhoto4(), options);
+            ivPhoto4.setVisibility(View.VISIBLE);
+        } else {
+            ivPhoto4.setVisibility(View.GONE);
+            ivAdd2.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (bankDoing.getPhoto5() != null && bankDoing.getPhoto5().length() > 0) {
+            x.image().bind(ivPhoto5, bankDoing.getPhoto5(), options);
+            ivPhoto5.setVisibility(View.VISIBLE);
+        } else {
+            ivPhoto5.setVisibility(View.GONE);
+            ivAdd2.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (bankDoing.getPhoto6() != null && bankDoing.getPhoto6().length() > 0) {
+            x.image().bind(ivPhoto6, bankDoing.getPhoto6(), options);
+            ivPhoto6.setVisibility(View.VISIBLE);
+        } else {
+            ivPhoto6.setVisibility(View.GONE);
+            ivAdd3.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (bankDoing.getPhoto7() != null && bankDoing.getPhoto7().length() > 0) {
+            x.image().bind(ivPhoto7, bankDoing.getPhoto7(), options);
+            ivPhoto7.setVisibility(View.VISIBLE);
+        } else {
+            ivPhoto7.setVisibility(View.GONE);
+            ivAdd3.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (bankDoing.getPhoto8() != null && bankDoing.getPhoto8().length() > 0) {
+            x.image().bind(ivPhoto8, bankDoing.getPhoto8(), options);
+            ivPhoto8.setVisibility(View.VISIBLE);
+            ivAdd3.setVisibility(View.GONE);
+        } else {
+            ivPhoto8.setVisibility(View.GONE);
+            ivAdd3.setVisibility(View.VISIBLE);
+            return;
+        }
+
+
     }
 
 
