@@ -1,23 +1,33 @@
 package com.miaxis.smartbank.activity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.adapter.MyFragmentAdapter;
+import com.miaxis.smartbank.domain.event.MessageArrivedEvent;
 import com.miaxis.smartbank.fragment.HomeFragment;
 import com.miaxis.smartbank.fragment.FunctionFragment;
 import com.miaxis.smartbank.fragment.IndexFragment;
 import com.miaxis.smartbank.fragment.TeamFragment;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -46,7 +56,7 @@ public class MainActivity extends BaseActivity {
         initData();
         initView();
         initTabLayout();
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -56,7 +66,6 @@ public class MainActivity extends BaseActivity {
         teamFragment = new TeamFragment();
         functionFragment = new FunctionFragment();
         homeFragment = new HomeFragment();
-
 
         fragmentList = new ArrayList<>();
         fragmentList.add(indexFragment);
@@ -102,5 +111,39 @@ public class MainActivity extends BaseActivity {
                 tab.setIcon(drawableList.get(i));
             }
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageArrive(MessageArrivedEvent event) {
+        Log.e("----","onMessageArrive");
+        Toast.makeText(this, event.getTopic()+"-"+event.getMessage(), Toast.LENGTH_SHORT).show();
+        inform();
+    }
+
+    //发出提醒， 震动， 声音
+    private void inform(){
+        //震动
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        long [] pattern = {100,400,100,400};   // 停止 开启 停止 开启
+        vibrator.vibrate(pattern,-1);
+        beep();
+        //
+    }
+
+    /**
+     * 提示音
+     */
+    private void beep(){
+        NotificationManager manger = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notification = new Notification();
+        notification.defaults=Notification.DEFAULT_SOUND;
+        manger.notify(1, notification);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

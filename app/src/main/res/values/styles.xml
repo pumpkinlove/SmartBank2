@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/gray_light</item>
+        <item name="android:statusBarColor">@color/blue_band_dark3</item>
         <item name="android:colorControlHighlight">@color/blue_band_dark3</item>
         <item name="android:windowAnimationStyle">@style/FeelyouWindowAnimTheme</item>
     </style>

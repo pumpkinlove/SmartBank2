@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.miaxis.smartbank.domain.Notice;
 import com.miaxis.smartbank.domain.event.MessageArrivedEvent;
 import com.miaxis.smartbank.utils.DateUtil;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.xutils.view.annotation.Event;
@@ -87,6 +89,7 @@ public class IndexFragment extends Fragment {
         noticeList.add(n2);
 
         noticeAdapter = new NoticeAdapter(noticeList, getContext());
+
     }
 
     private void initView() {
@@ -112,32 +115,9 @@ public class IndexFragment extends Fragment {
         rv_notice.setLayoutManager(new GridLayoutManager(getActivity(), 3));
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageArrive(MessageArrivedEvent event) {
-        Toast.makeText(getContext(), event.getTopic()+"-"+event.getMessage(), Toast.LENGTH_SHORT).show();
-        inform();
+    @Override
+    public void onDestroy() {
+
+        super.onDestroy();
     }
-
-    //发出提醒， 震动， 声音
-    private void inform(){
-        //震动
-        Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-        long [] pattern = {100,400,100,400};   // 停止 开启 停止 开启
-        vibrator.vibrate(pattern,-1);
-        beep();
-        //
-    }
-
-    /**
-     * 提示音
-     */
-    private void beep(){
-        NotificationManager manger = (NotificationManager)
-               getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = new Notification();
-        notification.defaults=Notification.DEFAULT_SOUND;
-        manger.notify(1, notification);
-
-    }
-
 }

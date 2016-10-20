@@ -10,23 +10,22 @@ import com.miaxis.smartbank.application.MyApplication;
 import com.miaxis.smartbank.domain.Config;
 import com.miaxis.smartbank.domain.event.MessageArrivedEvent;
 import com.miaxis.smartbank.emqtt.callback.MqttCallbackHandler;
-import com.miaxis.smartbank.emqtt.subscriber.MqttSubscriber;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class EmqttService extends Service {
 
     private Config config;
 
-    private ScheduledExecutorService scheduler;
-    private MqttSubscriber subscriber;
+//    private ScheduledExecutorService scheduler;
+
+    private MqttClient client;
 
     public EmqttService() {
     }
@@ -47,14 +46,54 @@ public class EmqttService extends Service {
             Toast.makeText(this,"系统设置错误",Toast.LENGTH_SHORT).show();
             return;
         }
-//        String serverURI = "tcp://" + config.getEmqttIp() + ":" + config.getEmqttPort();
+        String serverURI = "tcp://" + config.getEmqttIp() + ":" + config.getEmqttPort();
 //        subscriber = MqttSubscriber.getInstance(serverURI, config.getClientId(), handler);
+
+        try {
+            client = new MqttClient(serverURI, config.getClientId(), new MemoryPersistence());
+            MqttConnectOptions options = new MqttConnectOptions();
+            options.setAutomaticReconnect(true);
+            options.setKeepAliveInterval(60);
+            options.setCleanSession(true);
+            options.setUserName("admin");
+            options.setPassword("Pumpkin13.".toCharArray());
+            options.setConnectionTimeout(100);
+            client.setCallback(new MqttCallbackHandler() {
+                @Override
+                public void connectionLost(Throwable cause) {
+                    Log.e("--------","connectionLost__" + cause.getMessage());
+                }
+
+                @Override
+                public void messageArrived(String topic, MqttMessage message) throws Exception {
+                    Log.e("-------", topic + message.toString());
+                    EventBus.getDefault().postSticky(new MessageArrivedEvent(topic, message.toString()));
+                    Log.e("-------", "-================");
+                }
+
+                @Override
+                public void deliveryComplete(IMqttDeliveryToken token) {
+
+                }
+            });
+            client.connect(options);
+
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(this,"onStartCommand",Toast.LENGTH_SHORT).show();
-        reConnect(null);
+        try {
+            client.subscribe("topic/0001", 2);
+            Log.e("-----", "topic/0001");
+        } catch (MqttException e) {
+            Log.e("e", e.getMessage());
+            e.printStackTrace();
+        }
         return START_STICKY;
     }
 
@@ -67,76 +106,33 @@ public class EmqttService extends Service {
     @Override
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
-        Toast.makeText(this, "消息推送服务结束", Toast.LENGTH_SHORT).show();
+        try {
+            client.disconnect();
+            client.close();
+            Toast.makeText(this, "消息推送服务结束", Toast.LENGTH_SHORT).show();
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
     }
 
-    private void reConnect(final MqttClient client) {
-        Log.e("reConnect","reConnect---------");
-        if (scheduler != null) {
-            Log.e(scheduler.isShutdown()+"","isShutdown -------");
-            Log.e(scheduler.isTerminated()+"","isTerminated -----------");
-        }
-        scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                Log.e("scheduler run ","进入 run方法");
-                if(client == null || !client.isConnected()) {
-                    Log.e("reConnect ===== re ","重连 连接开始");
-                    connect();
-                }
-                Log.e("connect","重连  连接 完成");
-            }
-        }, 0 * 1000, 10 * 1000, TimeUnit.MILLISECONDS);
-    }
-
-    private void connect() {
-        try {
-            Log.e("connect","进入connect ------------");
-            Log.e("clientid", config.getClientId());
-            subscriber = MqttSubscriber.getInstance(
-                    "tcp://" + config.getEmqttIp() + ":" + config.getEmqttPort(),
-                    config.getClientId(),
-                    new MqttCallbackHandler() {
-                        @Override
-                        public void connectionLost(Throwable cause) {
-                            Log.e("lost","lost =============== l失去连接");
-                            reConnect(client);
-                        }
-
-                        @Override
-                        public void messageArrived(String topic, MqttMessage message) throws Exception {
-                            Log.e(topic, ""+message.toString());
-                            try {
-                                EventBus.getDefault().post(new MessageArrivedEvent(topic, message.toString()));
-                            } catch (Exception e) {
-                                Log.e("messageArrived", e.toString());
-                            }
-                        }
-
-                        @Override
-                        public void deliveryComplete(IMqttDeliveryToken token) {
-
-                        }
-                    }
-            );
-            subscriber.connect();
-
-            subscriber.subscribe("topic/0001",2);
-            subscriber.subscribe("topic/1111",2);
-            subscriber.subscribe("topic/1001",2);
-            subscriber.subscribe("topic/000001",2);
-            Log.e(" connect  connect"," 连接成功 -----");
-            if(scheduler != null){
-                Log.e(" scheduler  shutdown","shut down 定时任务");
-                scheduler.shutdown();
-            }
-        } catch (Exception e) {
-            Log.e("exception", "连接失败  异常"+e.getMessage());
-        }
-    }
-
-
+//    private void reConnect(final MqttClient client) {
+//        Log.e("reConnect","reConnect---------");
+//        if (scheduler != null) {
+//            Log.e(scheduler.isShutdown()+"","isShutdown -------");
+//            Log.e(scheduler.isTerminated()+"","isTerminated -----------");
+//        }
+//        scheduler = Executors.newSingleThreadScheduledExecutor();
+//        scheduler.scheduleAtFixedRate(new Runnable() {
+//            @Override
+//            public void run() {
+//                Log.e("scheduler run ","进入 run方法");
+//                if(client == null || !client.isConnected()) {
+//                    Log.e("reConnect ===== re ","重连 连接开始");
+//                }
+//                Log.e("connect","重连  连接 完成");
+//            }
+//        }, 0 * 1000, 10 * 1000, TimeUnit.MILLISECONDS);
+//    }
 
 }

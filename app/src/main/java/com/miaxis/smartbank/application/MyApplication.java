@@ -2,11 +2,20 @@ package com.miaxis.smartbank.application;
 
 import android.app.Application;
 import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.miaxis.smartbank.domain.Config;
 import com.miaxis.smartbank.domain.event.CallServiceEvent;
+import com.miaxis.smartbank.domain.event.MessageArrivedEvent;
+import com.miaxis.smartbank.domain.event.NetStatusEvent;
+import com.miaxis.smartbank.emqtt.callback.MqttCallbackHandler;
+import com.miaxis.smartbank.emqtt.subscriber.MqttSubscriber;
 import com.miaxis.smartbank.service.EmqttService;
 
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -25,10 +34,14 @@ public class MyApplication extends Application {
 
     public Config config;
 
+    public MqttSubscriber subscriber;
+
     @Override
     public void onCreate() {
         x.Ext.init(this);
         super.onCreate();
+
+        EventBus.getDefault().register(this);
 
         initDB();
         initService();
@@ -78,7 +91,21 @@ public class MyApplication extends Application {
 
     @Override
     public void onTerminate() {
+        EventBus.getDefault().unregister(this);
         super.onTerminate();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onNetworkChange(NetStatusEvent event) {
+        Log.e("----", event.getNetStatus());
+        Toast.makeText(this, event.getNetStatus(), Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageArrive(MessageArrivedEvent event) {
+        Log.e("----","onMessageArrive");
+        Toast.makeText(this, event.getTopic()+"-"+event.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -1,6 +1,8 @@
 package com.miaxis.smartbank.emqtt.client;
 
 
+import android.util.Log;
+
 import com.miaxis.smartbank.emqtt.callback.MqttCallbackHandler;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -95,6 +97,7 @@ public abstract class AbstractMqttClient {
     public boolean isConnect() {
         if (null != client)
             return client.isConnected();
+        Log.e("----", "null");
         return false;
     }
 }
