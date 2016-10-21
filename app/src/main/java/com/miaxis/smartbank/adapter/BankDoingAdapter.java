@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miaxis.smartbank.R;
+import com.miaxis.smartbank.application.MyApplication;
 import com.miaxis.smartbank.domain.BankDoing;
+import com.miaxis.smartbank.utils.Constant;
 import com.miaxis.smartbank.view.ImageDialog;
 
 import org.xutils.image.ImageOptions;
@@ -103,42 +105,47 @@ public class BankDoingAdapter extends BaseAdapter {
                         .build();
 
                 if (doing.getPhoto0() != null && doing.getPhoto0().length() > 0) {
-                    x.image().bind(holder.ivDoing0, doing.getPhoto0(), options);
+                    x.image().bind(holder.ivDoing0, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +   doing.getPhoto0(), options);
                     holder.ivDoing0.setVisibility(View.VISIBLE);
                 }
 
                 if (doing.getPhoto1() != null && doing.getPhoto1().length() > 0) {
-                    x.image().bind(holder.ivDoing1, doing.getPhoto1(), options);
+                    x.image().bind(holder.ivDoing1, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  doing.getPhoto1(), options);
                     holder.ivDoing1.setVisibility(View.VISIBLE);
                 }
 
                 if (doing.getPhoto2() != null && doing.getPhoto2().length() > 0) {
-                    x.image().bind(holder.ivDoing2, doing.getPhoto2(), options);
+                    x.image().bind(holder.ivDoing2, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  doing.getPhoto2(), options);
                     holder.ivDoing2.setVisibility(View.VISIBLE);
-
                 }
+
                 if (doing.getPhoto3() != null && doing.getPhoto3().length() > 0) {
-                    x.image().bind(holder.ivDoing3, doing.getPhoto3(), options);
+                    x.image().bind(holder.ivDoing3, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  doing.getPhoto3(), options);
                     holder.ivDoing3.setVisibility(View.VISIBLE);
                 }
+
                 if (doing.getPhoto4() != null && doing.getPhoto4().length() > 0) {
-                    x.image().bind(holder.ivDoing4, doing.getPhoto4(), options);
+                    x.image().bind(holder.ivDoing4, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  doing.getPhoto4(), options);
                     holder.ivDoing4.setVisibility(View.VISIBLE);
                 }
+
                 if (doing.getPhoto5() != null && doing.getPhoto5().length() > 0) {
-                    x.image().bind(holder.ivDoing5, doing.getPhoto5(), options);
+                    x.image().bind(holder.ivDoing5, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  doing.getPhoto5(), options);
                     holder.ivDoing5.setVisibility(View.VISIBLE);
                 }
+
                 if (doing.getPhoto6() != null && doing.getPhoto6().length() > 0) {
-                    x.image().bind(holder.ivDoing6, doing.getPhoto6(), options);
+                    x.image().bind(holder.ivDoing6, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  doing.getPhoto6(), options);
                     holder.ivDoing6.setVisibility(View.VISIBLE);
                 }
+
                 if (doing.getPhoto7() != null && doing.getPhoto7().length() > 0) {
-                    x.image().bind(holder.ivDoing7, doing.getPhoto7(), options);
+                    x.image().bind(holder.ivDoing7, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  doing.getPhoto7(), options);
                     holder.ivDoing7.setVisibility(View.VISIBLE);
                 }
+
                 if (doing.getPhoto8() != null && doing.getPhoto8().length() > 0) {
-                    x.image().bind(holder.ivDoing8, doing.getPhoto8(), options);
+                    x.image().bind(holder.ivDoing8, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  doing.getPhoto8(), options);
                     holder.ivDoing8.setVisibility(View.VISIBLE);
                 }
 

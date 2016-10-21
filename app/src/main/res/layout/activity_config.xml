@@ -195,6 +195,48 @@
             android:textSize="18sp"
             android:paddingLeft="15dp"
             android:gravity="center_vertical"
+            android:text="网点信息"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <Spinner
+            android:background="@drawable/white_bg_blue_ripple"
+            android:clickable="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="@color/blue_band_dark2"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/sp_org" />
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/gray_light"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+    <LinearLayout
+        android:clickable="true"
+        android:background="@drawable/white_bg_blue_ripple"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:background="@drawable/white_bg_blue_ripple"
+            android:clickable="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/dark"
+            android:textSize="18sp"
+            android:paddingLeft="15dp"
+            android:gravity="center_vertical"
             android:text="客户端编号"
             android:layout_weight="1"
             android:layout_width="0dp"

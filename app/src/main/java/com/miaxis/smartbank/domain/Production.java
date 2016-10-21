@@ -9,13 +9,13 @@ public class Production implements Serializable {
 
     private int id;
     private String name;
-    private String picUrl;
-
-    private String describe;
+    private String path;
+    private String remark;          //描述
     private String term;            //营销术语
-
     private String opdate;
     private String optime;
+    private String organid;
+    private String organname;
 
     public int getId() {
         return id;
@@ -33,20 +33,20 @@ public class Production implements Serializable {
         this.name = name;
     }
 
-    public String getPicUrl() {
-        return picUrl;
+    public String getPath() {
+        return path;
     }
 
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
+    public void setPath(String path) {
+        this.path = path;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public String getTerm() {
@@ -73,4 +73,19 @@ public class Production implements Serializable {
         this.optime = optime;
     }
 
+    public String getOrganid() {
+        return organid;
+    }
+
+    public void setOrganid(String organid) {
+        this.organid = organid;
+    }
+
+    public String getOrganname() {
+        return organname;
+    }
+
+    public void setOrganname(String organname) {
+        this.organname = organname;
+    }
 }

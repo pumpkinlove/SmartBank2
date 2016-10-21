@@ -18,15 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.miaxis.smartbank.R;
-import com.miaxis.smartbank.domain.Config;
 import com.miaxis.smartbank.domain.Version;
 import com.miaxis.smartbank.utils.Constant;
-import com.miaxis.smartbank.utils.DbUtil;
 import com.miaxis.smartbank.utils.XUtil;
 
-import org.xutils.DbManager;
 import org.xutils.common.Callback;
-import org.xutils.ex.DbException;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;

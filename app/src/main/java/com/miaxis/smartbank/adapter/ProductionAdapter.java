@@ -1,5 +1,6 @@
 package com.miaxis.smartbank.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miaxis.smartbank.R;
+import com.miaxis.smartbank.application.MyApplication;
+import com.miaxis.smartbank.domain.Config;
 import com.miaxis.smartbank.domain.Production;
+import com.miaxis.smartbank.utils.Constant;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -27,6 +31,7 @@ public class ProductionAdapter extends RecyclerView.Adapter<ProductionAdapter.Vi
     private RecyclerView recyclerView;
 
     private List<Production> productionList;
+
 
     public ProductionAdapter(List<Production> productionList,RecyclerView recyclerView) {
         this.productionList = productionList;
@@ -89,8 +94,9 @@ public class ProductionAdapter extends RecyclerView.Adapter<ProductionAdapter.Vi
                     .setFailureDrawableId(R.mipmap.product_default)
                     // 得到ImageOptions对象
                     .build();
-            x.image().bind(ivProduction, productionList.get(position).getPicUrl(), options);
-            tvDescribe.setText(productionList.get(position).getDescribe());
+            ivProduction.setAdjustViewBounds(true);
+            x.image().bind(ivProduction, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + productionList.get(position).getPath(), options);
+            tvDescribe.setText(productionList.get(position).getRemark());
             tvTerm.setText(productionList.get(position).getTerm());
 
             tvEbDescribe.setSelected(false);

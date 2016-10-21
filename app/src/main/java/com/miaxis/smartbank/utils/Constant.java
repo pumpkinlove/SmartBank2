@@ -16,4 +16,10 @@ public class Constant {
 
     public static final String CHECK_VERSION = "configJson/getversion";
 
+    public static final String PRODUCT_LIST = "finance/getFinanceListJson";
+
+    public static final String DOING_LIST = "doing/getDoingList";
+
+    public static final String ORG_LIST = "dotinfo/getAllWebsite";
+
 }

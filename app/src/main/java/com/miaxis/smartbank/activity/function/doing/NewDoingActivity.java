@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -20,10 +19,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.activity.BaseActivity;
+import com.miaxis.smartbank.application.MyApplication;
 import com.miaxis.smartbank.domain.BankDoing;
 import com.miaxis.smartbank.utils.CommonUtil;
 import com.miaxis.smartbank.utils.Constant;
-import com.miaxis.smartbank.utils.ImageUtil;
 import com.miaxis.smartbank.utils.XUtil;
 import com.miaxis.smartbank.view.BottomMenu;
 import com.miaxis.smartbank.view.ImageDialog;
@@ -251,14 +250,15 @@ public class NewDoingActivity extends BaseActivity {
     @Event(R.id.tv_right)
     private void upload(View view) {
         bankDoing.setContent(tvContent.getText().toString());
-
-        String url = "http://192.168.5.96:8080/" + Constant.PROJECT_NAME + "/" + Constant.ADD_DOING;
+        bankDoing.setOrganname(MyApplication.config.getOrganname());
+        bankDoing.setOrganid(MyApplication.config.getOrganid());
+        String url = MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" + Constant.ADD_DOING;
 
         Map<String, Object> params = new HashMap<>();
 
         params.put("content",   bankDoing.getContent());
-//        params.put("opdate",    bankDoing.getOpdate());
-//        params.put("optime",    bankDoing.getOptime());
+        params.put("opdate",    bankDoing.getOpdate());
+        params.put("optime",    bankDoing.getOptime());
         params.put("organid",   bankDoing.getOrganid());
         params.put("organname", bankDoing.getOrganname());
         params.put("photo0",    bankDoing.getPhoto0());
@@ -309,7 +309,7 @@ public class NewDoingActivity extends BaseActivity {
     private void uploadPhoto(final int index, File file) {
         Map<String, Object> params = new HashMap<>();
         params.put("uploadify", file);
-        String url = "http://192.168.5.96:8080/" + Constant.PROJECT_NAME + "/" + Constant.UPLOAD_PHOTO;
+        String url = MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" + Constant.UPLOAD_PHOTO;
         XUtil.UpLoadFile(url, params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -321,7 +321,7 @@ public class NewDoingActivity extends BaseActivity {
                     CommonUtil.alert(getFragmentManager(), "与服务器通讯失败");
                     return;
                 }
-                String path = "http://192.168.5.96:8080/" + Constant.PROJECT_NAME + "/" +  o.get("path").getAsString() + "/" + o.get("newFileName").getAsString();
+                String path = o.get("path").getAsString() + "/" + o.get("newFileName").getAsString();
                 urlList.add(path);
                 refreshList();
             }
@@ -476,6 +476,8 @@ public class NewDoingActivity extends BaseActivity {
 
         ImageOptions options = new ImageOptions.Builder()
                 .setFadeIn(true)
+                .setUseMemCache(true)//设置使用缓存
+                .setRadius(2)
                 // 是否忽略GIF格式的图片
                 .setIgnoreGif(false)
                 // 图片缩放模式
@@ -488,7 +490,7 @@ public class NewDoingActivity extends BaseActivity {
                 .build();
 
         if (bankDoing.getPhoto0() != null && bankDoing.getPhoto0().length() > 0) {
-            x.image().bind(ivPhoto0, bankDoing.getPhoto0(), options);
+            x.image().bind(ivPhoto0, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto0(), options);
             ivPhoto0.setVisibility(View.VISIBLE);
         } else {
             ivPhoto0.setVisibility(View.GONE);
@@ -497,7 +499,7 @@ public class NewDoingActivity extends BaseActivity {
         }
 
         if (bankDoing.getPhoto1() != null && bankDoing.getPhoto1().length() > 0) {
-            x.image().bind(ivPhoto1, bankDoing.getPhoto1(), options);
+            x.image().bind(ivPhoto1, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto1(), options);
             ivPhoto1.setVisibility(View.VISIBLE);
         } else {
             ivPhoto1.setVisibility(View.GONE);
@@ -506,7 +508,7 @@ public class NewDoingActivity extends BaseActivity {
         }
 
         if (bankDoing.getPhoto2() != null && bankDoing.getPhoto2().length() > 0) {
-            x.image().bind(ivPhoto2, bankDoing.getPhoto2(), options);
+            x.image().bind(ivPhoto2, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto2(), options);
             ivPhoto2.setVisibility(View.VISIBLE);
         } else {
             ivPhoto2.setVisibility(View.GONE);
@@ -515,7 +517,7 @@ public class NewDoingActivity extends BaseActivity {
         }
 
         if (bankDoing.getPhoto3() != null && bankDoing.getPhoto3().length() > 0) {
-            x.image().bind(ivPhoto3, bankDoing.getPhoto3(), options);
+            x.image().bind(ivPhoto3, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto3(), options);
             ivPhoto3.setVisibility(View.VISIBLE);
         } else {
             ivPhoto3.setVisibility(View.GONE);
@@ -524,7 +526,7 @@ public class NewDoingActivity extends BaseActivity {
         }
 
         if (bankDoing.getPhoto4() != null && bankDoing.getPhoto4().length() > 0) {
-            x.image().bind(ivPhoto4, bankDoing.getPhoto4(), options);
+            x.image().bind(ivPhoto4, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto4(), options);
             ivPhoto4.setVisibility(View.VISIBLE);
         } else {
             ivPhoto4.setVisibility(View.GONE);
@@ -533,7 +535,7 @@ public class NewDoingActivity extends BaseActivity {
         }
 
         if (bankDoing.getPhoto5() != null && bankDoing.getPhoto5().length() > 0) {
-            x.image().bind(ivPhoto5, bankDoing.getPhoto5(), options);
+            x.image().bind(ivPhoto5, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto5(), options);
             ivPhoto5.setVisibility(View.VISIBLE);
         } else {
             ivPhoto5.setVisibility(View.GONE);
@@ -542,7 +544,7 @@ public class NewDoingActivity extends BaseActivity {
         }
 
         if (bankDoing.getPhoto6() != null && bankDoing.getPhoto6().length() > 0) {
-            x.image().bind(ivPhoto6, bankDoing.getPhoto6(), options);
+            x.image().bind(ivPhoto6, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto6(), options);
             ivPhoto6.setVisibility(View.VISIBLE);
         } else {
             ivPhoto6.setVisibility(View.GONE);
@@ -551,7 +553,7 @@ public class NewDoingActivity extends BaseActivity {
         }
 
         if (bankDoing.getPhoto7() != null && bankDoing.getPhoto7().length() > 0) {
-            x.image().bind(ivPhoto7, bankDoing.getPhoto7(), options);
+            x.image().bind(ivPhoto7, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto7(), options);
             ivPhoto7.setVisibility(View.VISIBLE);
         } else {
             ivPhoto7.setVisibility(View.GONE);
@@ -560,7 +562,7 @@ public class NewDoingActivity extends BaseActivity {
         }
 
         if (bankDoing.getPhoto8() != null && bankDoing.getPhoto8().length() > 0) {
-            x.image().bind(ivPhoto8, bankDoing.getPhoto8(), options);
+            x.image().bind(ivPhoto8, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto8(), options);
             ivPhoto8.setVisibility(View.VISIBLE);
             ivAdd3.setVisibility(View.GONE);
         } else {

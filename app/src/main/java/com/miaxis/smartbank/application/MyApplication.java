@@ -2,6 +2,7 @@ package com.miaxis.smartbank.application;
 
 import android.app.Application;
 import android.content.Intent;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import org.xutils.DbManager;
 import org.xutils.ex.DbException;
 import org.xutils.x;
 
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -32,7 +34,7 @@ public class MyApplication extends Application {
 
     public DbManager.DaoConfig daoConfig;
 
-    public Config config;
+    public static Config config;
 
     public MqttSubscriber subscriber;
 
@@ -50,9 +52,12 @@ public class MyApplication extends Application {
     }
 
     private void initDB() {
+        File file = new File(Environment.getExternalStorageDirectory().getPath());
         daoConfig = new DbManager.DaoConfig()
                 .setDbName("smart_bank2.db")//创建数据库的名称
                 .setDbVersion(1)//数据库版本号
+                .setDbDir(file)
+                .setAllowTransaction(true)
                 .setDbUpgradeListener(new DbManager.DbUpgradeListener() {
                     @Override
                     public void onUpgrade(DbManager db, int oldVersion, int newVersion) {

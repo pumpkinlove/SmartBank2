@@ -27,6 +27,14 @@ public class Config {
     @Column(name = "clientId")
     private String clientId;
 
+    @Column(name = "organid")
+    private String organid;
+
+    @Column(name = "organname")
+    private String organname;
+
+    private String url;
+
     public Config() {
     }
 
@@ -77,4 +85,25 @@ public class Config {
     public void setClientId(String clientId) {
         this.clientId = clientId;
     }
+
+    public String getOrganid() {
+        return organid;
+    }
+
+    public void setOrganid(String organid) {
+        this.organid = organid;
+    }
+
+    public String getOrganname() {
+        return organname;
+    }
+
+    public void setOrganname(String organname) {
+        this.organname = organname;
+    }
+
+    public String getUrl() {
+        return "http://" + ip + ":" + port;
+    }
+
 }

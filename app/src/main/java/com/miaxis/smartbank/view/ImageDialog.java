@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miaxis.smartbank.R;
+import com.miaxis.smartbank.application.MyApplication;
+import com.miaxis.smartbank.utils.Constant;
 
 import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.Event;
@@ -78,7 +80,7 @@ public class ImageDialog extends DialogFragment {
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         imageView.setMaxHeight((int) (dm.heightPixels * 0.9));
-        x.image().bind(imageView, url, options);
+        x.image().bind(imageView, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  url, options);
 
         return view;
     }

@@ -89,7 +89,7 @@ public class IndexFragment extends Fragment {
         noticeList.add(n2);
 
         noticeAdapter = new NoticeAdapter(noticeList, getContext());
-
+        EventBus.getDefault().register(this);
     }
 
     private void initView() {
@@ -115,9 +115,38 @@ public class IndexFragment extends Fragment {
         rv_notice.setLayoutManager(new GridLayoutManager(getActivity(), 3));
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageArrive(MessageArrivedEvent event) {
+        Log.e("----","onMessageArrivefffff");
+        Toast.makeText(getContext(), event.getTopic()+"-"+event.getMessage(), Toast.LENGTH_SHORT).show();
+        inform();
+    }
+
+    //发出提醒， 震动， 声音
+    private void inform(){
+        //震动
+        Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        long [] pattern = {100,400,100,400};   // 停止 开启 停止 开启
+        vibrator.vibrate(pattern,-1);
+        beep();
+        //
+    }
+
+    /**
+     * 提示音
+     */
+    private void beep(){
+        NotificationManager manger = (NotificationManager)
+               getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notification = new Notification();
+        notification.defaults=Notification.DEFAULT_SOUND;
+        manger.notify(1, notification);
+
+    }
+
     @Override
     public void onDestroy() {
-
+        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 }

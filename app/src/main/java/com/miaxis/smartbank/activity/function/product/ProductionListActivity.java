@@ -3,13 +3,23 @@ package com.miaxis.smartbank.activity.function.product;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.activity.BaseActivity;
 import com.miaxis.smartbank.adapter.ProductionAdapter;
+import com.miaxis.smartbank.application.MyApplication;
+import com.miaxis.smartbank.domain.Config;
 import com.miaxis.smartbank.domain.Production;
+import com.miaxis.smartbank.utils.CommonUtil;
+import com.miaxis.smartbank.utils.Constant;
 import com.miaxis.smartbank.utils.XUtil;
 
 import org.xutils.common.Callback;
@@ -39,36 +49,21 @@ public class ProductionListActivity extends BaseActivity {
     @ViewInject(R.id.tv_middle)
     private TextView tvMiddle;
 
+    @ViewInject(R.id.tv_right)
+    private TextView tv_right;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
         initData();
         initView();
+        downList(null);
     }
 
     @Override
     protected void initData() {
-
         productionList = new ArrayList<>();
-        Production p = new Production();
-        p.setName("神奇理财1");
-        p.setPicUrl("http://img2.imgtn.bdimg.com/it/u=2228090847,3776253819&fm=11&gp=0.jpg");
-        p.setDescribe("神奇的理财产品");
-        p.setTerm("这个理财产品好啊");
-        productionList.add(p);
-        Production p2 = new Production();
-        p2.setName("神奇理财2");
-        p2.setPicUrl("http://img3.imgtn.bdimg.com/it/u=1226791657,2480826386&fm=11&gp=0.jpg");
-        p2.setDescribe("神奇的理财产品");
-        p2.setTerm("这个理财产品好啊");
-        productionList.add(p2);
-        Production p3 = new Production();
-        p3.setName("神奇理财3");
-        p3.setPicUrl("http://img5.imgtn.bdimg.com/it/u=2088999013,705617920&fm=23&gp=0.jpg");
-        p3.setDescribe("神奇的理财产品");
-        p3.setTerm("这个理财产品好啊");
-        productionList.add(p3);
         adapter = new ProductionAdapter(productionList, rvProduction);
     }
 
@@ -76,6 +71,9 @@ public class ProductionListActivity extends BaseActivity {
     protected void initView() {
         tvLeft.setVisibility(View.VISIBLE);
         tvMiddle.setText("理财产品");
+        tv_right.setVisibility(View.VISIBLE);
+        tv_right.setText("同步");
+        tv_right.setTextColor(getResources().getColor(R.color.green_dark));
 
         rvProduction.setLayoutManager(new LinearLayoutManager(this));
         rvProduction.setAdapter(adapter);
@@ -86,19 +84,42 @@ public class ProductionListActivity extends BaseActivity {
         finish();
     }
 
-    private void downList() {
-        String url = "";
+
+    @Event(R.id.tv_right)
+    private void downList(View view) {
+        String url = MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" + Constant.PRODUCT_LIST;
         Map<String, Object> params = new HashMap<>();
 
         XUtil.Post(url, params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                Log.e("---",result);
+                Gson g = new Gson();
+                JsonParser parser = new JsonParser();
+                JsonElement element = parser.parse(result);
+                JsonObject o = element.getAsJsonObject();
+                boolean success = o.get("success").getAsBoolean();
+                if (!success) {
+                    CommonUtil.alert(getFragmentManager(), "与服务器通讯失败");
+                    return;
+                }
+
+                productionList.clear();
+
+                JsonArray jsonArray = o.getAsJsonArray("rows");
+                for (int i=0; i<jsonArray.size(); i++) {
+                    JsonElement e = jsonArray.get(i);
+                    Production p = g.fromJson(e, Production.class);
+                    productionList.add(p);
+                }
+
+                adapter.notifyDataSetChanged();
 
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-
+                Log.e("---",ex.getMessage());
             }
 
             @Override

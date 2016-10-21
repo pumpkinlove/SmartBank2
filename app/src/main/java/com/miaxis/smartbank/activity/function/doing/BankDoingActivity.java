@@ -2,13 +2,24 @@ package com.miaxis.smartbank.activity.function.doing;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.activity.BaseActivity;
 import com.miaxis.smartbank.adapter.BankDoingAdapter;
+import com.miaxis.smartbank.application.MyApplication;
 import com.miaxis.smartbank.domain.BankDoing;
+import com.miaxis.smartbank.domain.Config;
+import com.miaxis.smartbank.domain.Production;
+import com.miaxis.smartbank.utils.CommonUtil;
 import com.miaxis.smartbank.utils.Constant;
 import com.miaxis.smartbank.utils.DateUtil;
 import com.miaxis.smartbank.utils.XUtil;
@@ -59,71 +70,13 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
         x.view().inject(this);
         initData();
         initView();
-
+        refreshList();
     }
 
     @Override
     protected void initData() {
-
         bankDoingList = new ArrayList<>();
-        BankDoing doing = new BankDoing();
         dialog = new ImageDialog();
-
-        doing.setOrganname("测试网点");
-        doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
-        doing.setOpdate(DateUtil.toMonthDay(new Date()));
-        doing.setOptime(DateUtil.toHourMinString(new Date()));
-
-        doing.setPhoto0("http://hi.csdn.net/attachment/201110/30/0_1319976939pkgr.gif");
-        doing.setPhoto1("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
-        doing.setPhoto2("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
-        doing.setPhoto3("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
-        doing.setPhoto4("http://thumb.takefoto.cn/wp-content/uploads/2016/03/201603180844279236.jpg");
-        doing.setPhoto5("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
-        doing.setPhoto6("http://pic1.win4000.com/wallpaper/0/57eb6be0cecfa.jpg");
-        doing.setPhoto7("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
-        doing.setPhoto8("http://pic.pp3.cn/uploads//201610/20161007012.jpg");
-
-        bankDoingList.add(doing);
-        doing = new BankDoing();
-        doing.setOrganname("测试网点");
-        doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
-        doing.setOpdate(DateUtil.toMonthDay(new Date()));
-        doing.setOptime(DateUtil.toHourMinString(new Date()));
-
-        doing.setPhoto0("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
-
-        bankDoingList.add(doing);
-        doing = new BankDoing();
-        doing.setOrganname("测试网点");
-        doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
-        doing.setOpdate(DateUtil.toMonthDay(new Date()));
-        doing.setOptime(DateUtil.toHourMinString(new Date()));
-
-        doing.setPhoto0("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
-        doing.setPhoto1("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
-
-        bankDoingList.add(doing);
-        doing = new BankDoing();
-        doing.setOrganname("测试网点");
-        doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
-        doing.setOpdate(DateUtil.toMonthDay(new Date()));
-        doing.setOptime(DateUtil.toHourMinString(new Date()));
-
-        doing.setPhoto0("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
-        doing.setPhoto1("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232292644,425916855&fm=111&gp=0.jpg");
-        doing.setPhoto2("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
-
-        bankDoingList.add(doing);
-        doing = new BankDoing();
-        doing.setOrganname("测试网点");
-        doing.setContent("今天网点的主题是卡通人物啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了");
-        doing.setOpdate(DateUtil.toMonthDay(new Date()));
-        doing.setOptime(DateUtil.toHourMinString(new Date()));
-
-        doing.setPhoto0("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3425590442,2523378451&fm=111&gp=0.jpg");
-
-        bankDoingList.add(doing);
 
         adapter = new BankDoingAdapter(bankDoingList, this);
         adapter.setPhotoClickListener(new BankDoingAdapter.PhotoClickListener() {
@@ -153,18 +106,46 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
         xlvBankDoing.setAdapter(adapter);
     }
 
-    private void loadDoing() {
-        String url = "";
+    private void refreshList() {
+        String url = MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" + Constant.DOING_LIST;
 
         Map<String, Object> params = new HashMap<>();
 
         params.put("page", page);
+        params.put("rows", 10);
 
         XUtil.Post(url, params, new Callback.CommonCallback<String>() {
 
             @Override
             public void onSuccess(String result) {
+                Log.e("---",result);
+                Gson g = new Gson();
+                JsonParser parser = new JsonParser();
+                JsonElement element = parser.parse(result);
+                JsonObject o = element.getAsJsonObject();
+                boolean success = o.get("success").getAsBoolean();
+                if (!success) {
+                    CommonUtil.alert(getFragmentManager(), "与服务器通讯失败");
+                    return;
+                }
 
+                if(isClear){
+                    bankDoingList.clear();
+                }
+
+                JsonArray jsonArray = o.getAsJsonArray("rows");
+                total = jsonArray.size();
+                if (page > total) {
+                    Toast.makeText(getApplication(), "已经加载到最后一条", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                for (int i=0; i<jsonArray.size(); i++) {
+                    JsonElement e = jsonArray.get(i);
+                    BankDoing d = g.fromJson(e, BankDoing.class);
+                    bankDoingList.add(d);
+                }
+
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -179,7 +160,9 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
 
             @Override
             public void onFinished() {
-
+                xlvBankDoing.stopRefresh();
+                xlvBankDoing.stopLoadMore();
+                xlvBankDoing.setRefreshTime("刚刚");
             }
         });
     }
@@ -187,15 +170,16 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
 
     @Override
     public void onRefresh() {
-        isClear = false;
-        page ++;
+        isClear = true;
+        page = 1;
+        refreshList();
     }
 
     @Override
     public void onLoadMore() {
-        xlvBankDoing.stopRefresh();
-        xlvBankDoing.stopLoadMore();
-        xlvBankDoing.setRefreshTime("刚刚");
+        isClear = false;
+        page ++;
+        refreshList();
     }
 
     @Event(R.id.tv_left)
@@ -208,11 +192,4 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
         startActivityForResult(new Intent(this, NewDoingActivity.class), 1);
     }
 
-    private void refreshList() {
-
-        String url = "http://192.168.5.96:8080/" + Constant.PROJECT_NAME + "/" ;
-
-
-
-    }
 }
