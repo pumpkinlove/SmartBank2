@@ -57,7 +57,7 @@ public class EmqttService extends Service {
             options.setCleanSession(true);
             options.setUserName("admin");
             options.setPassword("Pumpkin13.".toCharArray());
-            options.setConnectionTimeout(100);
+            options.setConnectionTimeout(1000);
             client.setCallback(new MqttCallbackHandler() {
                 @Override
                 public void connectionLost(Throwable cause) {
@@ -105,7 +105,6 @@ public class EmqttService extends Service {
 
     @Override
     public void onDestroy() {
-        EventBus.getDefault().unregister(this);
         try {
             client.disconnect();
             client.close();
@@ -115,24 +114,5 @@ public class EmqttService extends Service {
         }
         super.onDestroy();
     }
-
-//    private void reConnect(final MqttClient client) {
-//        Log.e("reConnect","reConnect---------");
-//        if (scheduler != null) {
-//            Log.e(scheduler.isShutdown()+"","isShutdown -------");
-//            Log.e(scheduler.isTerminated()+"","isTerminated -----------");
-//        }
-//        scheduler = Executors.newSingleThreadScheduledExecutor();
-//        scheduler.scheduleAtFixedRate(new Runnable() {
-//            @Override
-//            public void run() {
-//                Log.e("scheduler run ","进入 run方法");
-//                if(client == null || !client.isConnected()) {
-//                    Log.e("reConnect ===== re ","重连 连接开始");
-//                }
-//                Log.e("connect","重连  连接 完成");
-//            }
-//        }, 0 * 1000, 10 * 1000, TimeUnit.MILLISECONDS);
-//    }
 
 }

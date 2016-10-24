@@ -23,6 +23,7 @@ import com.miaxis.smartbank.application.MyApplication;
 import com.miaxis.smartbank.domain.BankDoing;
 import com.miaxis.smartbank.utils.CommonUtil;
 import com.miaxis.smartbank.utils.Constant;
+import com.miaxis.smartbank.utils.DateUtil;
 import com.miaxis.smartbank.utils.XUtil;
 import com.miaxis.smartbank.view.BottomMenu;
 import com.miaxis.smartbank.view.ImageDialog;
@@ -307,12 +308,14 @@ public class NewDoingActivity extends BaseActivity {
 
 
     private void uploadPhoto(final int index, File file) {
+        Log.e("uploadPhoto", DateUtil.toHourMinString(new Date()) + "   =======");
         Map<String, Object> params = new HashMap<>();
         params.put("uploadify", file);
         String url = MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" + Constant.UPLOAD_PHOTO;
         XUtil.UpLoadFile(url, params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                Log.e("onSuccess", DateUtil.toHourMinString(new Date()) + "   =======");
                 JsonParser parser = new JsonParser();
                 JsonElement element = parser.parse(result);
                 JsonObject o = element.getAsJsonObject();
@@ -344,7 +347,7 @@ public class NewDoingActivity extends BaseActivity {
     }
 
     private void refreshList() {
-
+        Log.e("refreshList", DateUtil.toHourMinString(new Date()) + "   =======");
         switch (urlList.size()) {
             case 0:
                 bankDoing.setPhoto0(null);
@@ -474,6 +477,7 @@ public class NewDoingActivity extends BaseActivity {
         ivAdd2.setVisibility(View.GONE);
         ivAdd3.setVisibility(View.GONE);
 
+        Log.e("setphoto", DateUtil.toHourMinString(new Date()) + "   =======");
         ImageOptions options = new ImageOptions.Builder()
                 .setFadeIn(true)
                 .setUseMemCache(true)//设置使用缓存
@@ -483,12 +487,14 @@ public class NewDoingActivity extends BaseActivity {
                 // 图片缩放模式
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
                 // 下载中显示的图片
-//                        .setLoadingDrawableId(R.mipmap.product_default)
+                        .setLoadingDrawableId(R.mipmap.upload)
                 // 下载失败显示的图片
-//                        .setFailureDrawableId(R.mipmap.product_default)
+                        .setFailureDrawableId(R.mipmap.failpic)
                 // 得到ImageOptions对象
+                .setPlaceholderScaleType(ImageView.ScaleType.FIT_CENTER)
                 .build();
 
+        Log.e("getPhoto0", DateUtil.toHourMinString(new Date()) + "   =======");
         if (bankDoing.getPhoto0() != null && bankDoing.getPhoto0().length() > 0) {
             x.image().bind(ivPhoto0, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto0(), options);
             ivPhoto0.setVisibility(View.VISIBLE);
@@ -497,7 +503,7 @@ public class NewDoingActivity extends BaseActivity {
             ivAdd1.setVisibility(View.VISIBLE);
             return;
         }
-
+        Log.e("setphoto", DateUtil.toHourMinString(new Date()) + "   =======");
         if (bankDoing.getPhoto1() != null && bankDoing.getPhoto1().length() > 0) {
             x.image().bind(ivPhoto1, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto1(), options);
             ivPhoto1.setVisibility(View.VISIBLE);
@@ -506,6 +512,7 @@ public class NewDoingActivity extends BaseActivity {
             ivAdd1.setVisibility(View.VISIBLE);
             return;
         }
+        Log.e("setphoto", DateUtil.toHourMinString(new Date()) + "   =======");
 
         if (bankDoing.getPhoto2() != null && bankDoing.getPhoto2().length() > 0) {
             x.image().bind(ivPhoto2, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto2(), options);
@@ -515,6 +522,7 @@ public class NewDoingActivity extends BaseActivity {
             ivAdd1.setVisibility(View.VISIBLE);
             return;
         }
+        Log.e("setphoto", DateUtil.toHourMinString(new Date()) + "   =======");
 
         if (bankDoing.getPhoto3() != null && bankDoing.getPhoto3().length() > 0) {
             x.image().bind(ivPhoto3, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto3(), options);
@@ -570,7 +578,7 @@ public class NewDoingActivity extends BaseActivity {
             ivAdd3.setVisibility(View.VISIBLE);
             return;
         }
-
+        Log.e("setphoto", DateUtil.toHourMinString(new Date()) + "   =======");
 
     }
 

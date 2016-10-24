@@ -55,6 +55,11 @@ public class IndexFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,7 +94,7 @@ public class IndexFragment extends Fragment {
         noticeList.add(n2);
 
         noticeAdapter = new NoticeAdapter(noticeList, getContext());
-        EventBus.getDefault().register(this);
+
     }
 
     private void initView() {

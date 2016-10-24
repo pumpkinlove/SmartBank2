@@ -107,10 +107,5 @@ public class MyApplication extends Application {
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageArrive(MessageArrivedEvent event) {
-        Log.e("----","onMessageArrive");
-        Toast.makeText(this, event.getTopic()+"-"+event.getMessage(), Toast.LENGTH_SHORT).show();
-    }
 
 }
