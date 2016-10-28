@@ -7,16 +7,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.miaxis.smartbank.domain.Config;
-import com.miaxis.smartbank.domain.event.CallServiceEvent;
-import com.miaxis.smartbank.domain.event.MessageArrivedEvent;
 import com.miaxis.smartbank.domain.event.NetStatusEvent;
-import com.miaxis.smartbank.emqtt.callback.MqttCallbackHandler;
-import com.miaxis.smartbank.emqtt.subscriber.MqttSubscriber;
 import com.miaxis.smartbank.service.EmqttService;
 
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -35,8 +28,6 @@ public class MyApplication extends Application {
     public DbManager.DaoConfig daoConfig;
 
     public static Config config;
-
-    public MqttSubscriber subscriber;
 
     @Override
     public void onCreate() {
@@ -106,6 +97,5 @@ public class MyApplication extends Application {
         Toast.makeText(this, event.getNetStatus(), Toast.LENGTH_SHORT).show();
 
     }
-
 
 }

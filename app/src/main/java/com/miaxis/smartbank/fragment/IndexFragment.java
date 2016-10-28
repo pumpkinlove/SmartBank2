@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.adapter.NoticeAdapter;
 import com.miaxis.smartbank.domain.Notice;
-import com.miaxis.smartbank.domain.event.MessageArrivedEvent;
+import com.miaxis.smartbank.domain.event.NotifyEvent;
 import com.miaxis.smartbank.utils.DateUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -67,6 +67,7 @@ public class IndexFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_index, container, false);
         x.view().inject(this, v);
+
         return v;
     }
 
@@ -113,6 +114,8 @@ public class IndexFragment extends Fragment {
     @Event(R.id.fab_list)
     private void listLayout(View view) {
         rv_notice.setLayoutManager(new LinearLayoutManager(getContext()));
+        EventBus.getDefault().post(new NotifyEvent("111", "222"));
+
     }
 
     @Event(R.id.fab_grid)
@@ -120,10 +123,10 @@ public class IndexFragment extends Fragment {
         rv_notice.setLayoutManager(new GridLayoutManager(getActivity(), 3));
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageArrive(MessageArrivedEvent event) {
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onNotifyEvent(NotifyEvent event) {
         Log.e("----","onMessageArrivefffff");
-        Toast.makeText(getContext(), event.getTopic()+"-"+event.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), event.getTopic()+"-"+event.getContent(), Toast.LENGTH_SHORT).show();
         inform();
     }
 
