@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.miaxis.smartbank.R;
+import com.miaxis.smartbank.utils.CommonUtil;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -19,12 +20,10 @@ import org.xutils.x;
 /**
  * Created by xu.nan on 2016/10/21.
  */
-
 public class AboutDialog extends DialogFragment {
 
-    @ViewInject(R.id.ad_tv_about)
-    private TextView ad_tv_about;
-
+    @ViewInject(R.id.tv_version)
+    private TextView tv_version;
     @Override
     public void onStart() {
         super.onStart();
@@ -32,7 +31,7 @@ public class AboutDialog extends DialogFragment {
         if (dialog != null) {
             DisplayMetrics dm = new DisplayMetrics();
             getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-            dialog.getWindow().setLayout((int) (dm.widthPixels * 0.77), (int) (dm.heightPixels * 0.33));
+            dialog.getWindow().setLayout((int) (dm.widthPixels * 0.77), ViewGroup.LayoutParams.WRAP_CONTENT);
         }
     }
 
@@ -42,7 +41,7 @@ public class AboutDialog extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_about, container);
         x.view().inject(this, view);
-
+        tv_version.setText("v " + CommonUtil.getCurVersion(getActivity()).getVersionName());
         return view;
     }
 

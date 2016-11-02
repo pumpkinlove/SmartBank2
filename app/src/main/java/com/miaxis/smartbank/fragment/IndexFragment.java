@@ -4,6 +4,7 @@ package com.miaxis.smartbank.fragment;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
@@ -19,7 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.miaxis.smartbank.R;
+import com.miaxis.smartbank.activity.index.CustomerActivity;
+import com.miaxis.smartbank.adapter.CustomerAdapter;
 import com.miaxis.smartbank.adapter.NoticeAdapter;
+import com.miaxis.smartbank.domain.Customer;
 import com.miaxis.smartbank.domain.Notice;
 import com.miaxis.smartbank.domain.event.NotifyEvent;
 import com.miaxis.smartbank.utils.DateUtil;
@@ -46,9 +50,14 @@ public class IndexFragment extends Fragment {
     @ViewInject(R.id.rv_notice)
     private RecyclerView rv_notice;
 
+    @ViewInject(R.id.rv_customer)
+    private RecyclerView rv_customer;
+
     private NoticeAdapter noticeAdapter;
+    private CustomerAdapter customerAdapter;
 
     private List<Notice> noticeList;
+    private List<Customer> customerList;
 
 
     public IndexFragment() {
@@ -80,8 +89,9 @@ public class IndexFragment extends Fragment {
 
     }
 
-    private void initData(){
+    private void initData() {
         noticeList = new ArrayList<>();
+        customerList = new ArrayList<>();
 
         Notice n = new Notice();
         n.setTitle("1号窗口，请求援助");
@@ -96,11 +106,20 @@ public class IndexFragment extends Fragment {
 
         noticeAdapter = new NoticeAdapter(noticeList, getContext());
 
+        Customer c = new Customer();
+        c.setCustomname("张三");
+        c.setBusiness("贵宾业务");
+        c.setComeDate(DateUtil.toMonthDay(new Date()));
+        c.setComeTime(DateUtil.toHourMinString(new Date()));
+
+        customerList.add(c);
+        customerAdapter = new CustomerAdapter(customerList, getContext());
+
     }
 
     private void initView() {
         tv_middle.setText("通知");
-        rv_notice.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        rv_notice.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_notice.setAdapter(noticeAdapter);
         noticeAdapter.setNoticeListener(new NoticeAdapter.NoticeListener() {
             @Override
@@ -109,13 +128,23 @@ public class IndexFragment extends Fragment {
                 noticeAdapter.notifyDataSetChanged();
             }
         });
+
+        rv_customer.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rv_customer.setAdapter(customerAdapter);
+        customerAdapter.setListener(new CustomerAdapter.CustomerListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), CustomerActivity.class);
+                intent.putExtra("customer", customerList.get(position));
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Event(R.id.fab_list)
     private void listLayout(View view) {
         rv_notice.setLayoutManager(new LinearLayoutManager(getContext()));
-        EventBus.getDefault().post(new NotifyEvent("111", "222"));
-
     }
 
     @Event(R.id.fab_grid)

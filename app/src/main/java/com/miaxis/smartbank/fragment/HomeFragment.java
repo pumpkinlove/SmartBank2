@@ -15,10 +15,12 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.activity.home.ConfigActivity;
+import com.miaxis.smartbank.application.MyApplication;
 import com.miaxis.smartbank.domain.Version;
 import com.miaxis.smartbank.utils.CommonUtil;
 import com.miaxis.smartbank.utils.Constant;
 import com.miaxis.smartbank.utils.XUtil;
+import com.miaxis.smartbank.view.AboutDialog;
 import com.miaxis.smartbank.view.UpdateDialog;
 
 import org.xutils.common.Callback;
@@ -36,6 +38,7 @@ public class HomeFragment extends Fragment {
 
     private ProgressDialog pd_check_version;
     private UpdateDialog updateDialog;
+    private AboutDialog aboutDialog;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -61,6 +64,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initData() {
+        aboutDialog = new AboutDialog();
         updateDialog = new UpdateDialog();
         pd_check_version = new ProgressDialog(getContext());
     }
@@ -72,17 +76,26 @@ public class HomeFragment extends Fragment {
         pd_check_version.setCanceledOnTouchOutside(false);
     }
 
+    @Event(R.id.ll_about)
+    private void about(View view) {
+        aboutDialog.show(getActivity().getFragmentManager(), "ABOUT");
+    }
+
     @Event(R.id.ll_config)
     private void config(View view) {
         startActivity(new Intent(getActivity(), ConfigActivity.class));
     }
 
     @Event(R.id.tv_update)
-    private void checkVersion(View view){
+    private void checkVersion(View view) {
         Log.e("---------","checkVersion");
 
         pd_check_version.show();
-        String urlDemo = "http://192.168.5.96:8080/"+ Constant.PROJECT_NAME + "/" + Constant.CHECK_VERSION + "?organid=1001&versiontype=03";
+        String urlDemo = "http://" + MyApplication.config.getIp() + ":"
+                + MyApplication.config.getPort() + "/"
+                + Constant.PROJECT_NAME + "/"
+                + Constant.CHECK_VERSION
+                + "?organid=1001&versiontype=03";
         XUtil.Post(urlDemo, null, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {

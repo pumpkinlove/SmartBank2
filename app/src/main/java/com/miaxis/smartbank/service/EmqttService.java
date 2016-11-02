@@ -40,7 +40,7 @@ public class EmqttService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Toast.makeText(this,"onCreate",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,"onCreate",Toast.LENGTH_SHORT).show();
         config = ((MyApplication) getApplicationContext()).config;
         if (config == null) {
             Toast.makeText(this,"系统设置错误",Toast.LENGTH_SHORT).show();
@@ -92,7 +92,7 @@ public class EmqttService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this,"onStartCommand",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,"onStartCommand",Toast.LENGTH_SHORT).show();
         return START_REDELIVER_INTENT;
     }
 

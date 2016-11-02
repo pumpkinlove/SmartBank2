@@ -15,9 +15,6 @@ import org.xutils.x;
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends BaseActivity {
 
-    @ViewInject(R.id.icvp)
-    private HorizontalInfiniteCycleViewPager icvp;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +22,7 @@ public class LoginActivity extends BaseActivity {
         x.view().inject(this);
         initData();
         initView();
+        begin();
     }
 
     @Override
@@ -35,20 +33,25 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-//        icvp.setAdapter();
-//        icvp.setScrollDuration(500);
-//        icvp.setInterpolator(...);
-//        icvp.setMediumScaled(true);
-//        icvp.setMaxPageScale(0.8F);
-//        icvp.setMinPageScale(0.5F);
-//        icvp.setCenterPageScaleOffset(30.0F);
-//        icvp.setMinPageScaleOffset(5.0F);
-//        icvp.setOnInfiniteCyclePageTransformListener(...);
-
     }
 
-    @Event(R.id.tv_login)
-    private void login(View view) {
-        startActivity(new Intent(this, MainActivity.class));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        begin();
+    }
+
+    private void begin() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+        }).start();
     }
 }

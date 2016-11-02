@@ -42,8 +42,9 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
         if(n == null){
             return;
         }
-        holder.tvNoticeTime.setText(n.getOptime());
-        holder.tvNoticeTitle.setText(n.getTitle());
+        holder.tv_from.setText(n.getTerminalId());
+        holder.tv_time.setText(n.getOptime());
+        holder.tv_message.setText(n.getTitle());
         if(n.isRead()){
             holder.llNotice.setBackground(context.getDrawable(R.drawable.dark3_bg_white_ripple));
         }else{
@@ -59,11 +60,14 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
     class NoticeViewHolder extends RecyclerView.ViewHolder {
 
-        @ViewInject(R.id.tvNoticeTitle)
-        private TextView tvNoticeTitle;
+        @ViewInject(R.id.tv_from)
+        private TextView tv_from;
 
-        @ViewInject(R.id.tvNoticeTime)
-        private TextView tvNoticeTime;
+        @ViewInject(R.id.tv_message)
+        private TextView tv_message;
+
+        @ViewInject(R.id.tv_time)
+        private TextView tv_time;
 
         @ViewInject(R.id.ll_item_notice)
         private LinearLayout llNotice;
