@@ -28,6 +28,8 @@ public class Notice {
     private String terminalId;
     @Column(name = "terminalType")
     private String terminalType;
+    @Column(name =  "source")
+    private String source;
 
     public int getId() {
         return id;
@@ -107,5 +109,13 @@ public class Notice {
 
     public void setTerminalType(String terminalType) {
         this.terminalType = terminalType;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }

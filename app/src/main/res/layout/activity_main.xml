@@ -15,15 +15,21 @@
 
     </android.support.v4.view.ViewPager>
 
+    <View
+        android:background="@color/gray_light"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
     <android.support.design.widget.TabLayout
         android:clickable="true"
         android:id="@+id/tl_main"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/dark_bg_light_ripple"
-        app:tabIndicatorColor="@color/blue_band_light"
+        android:background="@color/blue_band_dark"
+        app:tabIndicatorColor="@color/blue_band_dark3"
         app:tabIndicatorHeight="1dp"
-        app:tabSelectedTextColor="@color/white"
+        app:tabSelectedTextColor="@color/blue_band_light"
+        app:tabBackground="@drawable/tab_background"
         app:tabTextColor="@color/gray_dark"
         app:tabGravity="fill"
         app:tabMode="fixed">

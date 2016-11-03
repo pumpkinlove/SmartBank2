@@ -112,8 +112,10 @@ public class ConfigActivity extends BaseActivity {
         config.setEmqttIp(et_emqtt_ip.getText().toString());
         config.setEmqttPort(et_emqtt_port.getText().toString());
         config.setClientId(et_clientid.getText().toString());
-        config.setOrganname(sp_org.getSelectedItem().toString().split(" ")[0]);
-        config.setOrganid(sp_org.getSelectedItem().toString().split(" ")[1]);
+        if (sp_org.getChildCount() > 0) {
+            config.setOrganname(sp_org.getSelectedItem().toString().split(" ")[0]);
+            config.setOrganid(sp_org.getSelectedItem().toString().split(" ")[1]);
+        }
         DbManager dbManager = x.getDb(((MyApplication) getApplicationContext()).daoConfig);
         try {
             dbManager.saveOrUpdate(config);

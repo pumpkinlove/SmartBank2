@@ -4,7 +4,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.adapter.MyFragmentAdapter;
@@ -59,7 +61,6 @@ public class MainActivity extends BaseActivity {
 
         adapter = new MyFragmentAdapter(getSupportFragmentManager(),fragmentList);
 
-
     }
 
     @Override
@@ -89,10 +90,11 @@ public class MainActivity extends BaseActivity {
         drawableList.add(tab_drawable);
 
         for(int i=0; i< tl_main.getTabCount(); i++){
-            TabLayout.Tab tab = tl_main.getTabAt(i);
+            final TabLayout.Tab tab = tl_main.getTabAt(i);
             if(tab != null){
 //                tab.setText(titles[i]);
                 tab.setIcon(drawableList.get(i));
+
             }
         }
     }

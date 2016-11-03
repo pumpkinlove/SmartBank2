@@ -71,7 +71,7 @@ public class EmqttService extends Service {
                         @Override
                         public void messageArrived(String topic, MqttMessage message) throws Exception {
                             Log.e("-----","messageArrived");
-                            EventBus.getDefault().postSticky(new NotifyEvent(topic, message.toString()));
+                            EventBus.getDefault().post(new NotifyEvent(topic, message.toString()));
                         }
 
                         @Override

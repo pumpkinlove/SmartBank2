@@ -19,18 +19,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.activity.index.CustomerActivity;
 import com.miaxis.smartbank.adapter.CustomerAdapter;
 import com.miaxis.smartbank.adapter.NoticeAdapter;
+import com.miaxis.smartbank.application.MyApplication;
 import com.miaxis.smartbank.domain.Customer;
 import com.miaxis.smartbank.domain.Notice;
+import com.miaxis.smartbank.domain.Publish;
 import com.miaxis.smartbank.domain.event.NotifyEvent;
 import com.miaxis.smartbank.utils.DateUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.xutils.DbManager;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -59,6 +65,7 @@ public class IndexFragment extends Fragment {
     private List<Notice> noticeList;
     private List<Customer> customerList;
 
+    private DbManager dbManager;
 
     public IndexFragment() {
         // Required empty public constructor
@@ -115,6 +122,8 @@ public class IndexFragment extends Fragment {
         customerList.add(c);
         customerAdapter = new CustomerAdapter(customerList, getContext());
 
+        dbManager = x.getDb(((MyApplication) getActivity().getApplicationContext()).daoConfig);
+
     }
 
     private void initView() {
@@ -155,7 +164,77 @@ public class IndexFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onNotifyEvent(NotifyEvent event) {
         Log.e("----","onMessageArrivefffff");
-        Toast.makeText(getContext(), event.getTopic()+"-"+event.getContent(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), event.getTopic() + "-" + event.getContent(), Toast.LENGTH_SHORT).show();
+
+        try {
+            String informJson = event.getContent();
+            Gson g = new Gson();
+            Publish p = g.fromJson(informJson, Publish.class);
+            if (p == null) {
+                return;
+            }
+            String informType = p.getPubtype();
+            char start = informType.charAt(0);
+            if ('1'== start) {
+                Notice n = new Notice();
+                n.setContent("请求援助");
+                n.setOpdate(p.getOpdate());
+                n.setOptime(p.getOptime());
+                if ("000001".equals(p.getTerminalid())) {
+                    n.setSource("1号窗口");
+                } else if ("1111".equals(p.getTerminalid())  || "0001".equals(p.getTerminalid()) ) {
+                    n.setSource("填单机_"+p.getTerminalid());
+                } else {
+                    n.setSource(p.getTerminalid());
+                }
+                noticeList.add(n);
+                dbManager.save(n);
+                noticeAdapter.notifyDataSetChanged();
+                inform();
+            } else if ('2' == start) {
+                Customer c = new Customer();
+                c.setBusiness(p.getPubtype().split("_")[1]);
+                c.setCustomname(p.getObjname());
+                c.setCardid(p.getObjid());
+                c.setComeDate(p.getOpdate());
+                c.setComeTime(p.getOptime());
+                dbManager.save(c);
+                customerList.add(c);
+                customerAdapter.notifyDataSetChanged();
+                inform();
+            } else if ('3' == start) {
+                Customer c = new Customer();
+                String contentJson = p.getPubtype().split("_")[1];
+                JsonParser parser = new JsonParser();
+                JsonObject object = parser.parse(contentJson).getAsJsonObject();
+                String begintime = object.get("begintime").getAsString();
+                String endtime = object.get("endtime").getAsString();
+                String mobile = object.get("mobile").getAsString();
+                String subdate = object.get("subdate").getAsString();
+                c.setBusiness("贵宾预约("+subdate+"_"+begintime+"-"+endtime+"_"+mobile+")");
+                if(p.getObjname() == null || p.getObjname().length() == 0){
+                    c.setCustomname("匿名");
+                }else{
+                    c.setCustomname(p.getObjname());
+                }
+
+                c.setCardid(p.getObjid());
+                c.setComeDate(p.getOpdate());
+                c.setComeTime(p.getOptime());
+                dbManager.save(c);
+                customerList.add(c);
+                customerAdapter.notifyDataSetChanged();
+                inform();
+            }
+
+        } catch (Exception e) {
+
+        }
+
+
+
+
+
         inform();
     }
 
