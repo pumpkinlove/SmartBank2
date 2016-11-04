@@ -4,9 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
 import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.adapter.MyFragmentAdapter;
@@ -59,44 +57,67 @@ public class MainActivity extends BaseActivity {
         fragmentList.add(functionFragment);
         fragmentList.add(homeFragment);
 
-        adapter = new MyFragmentAdapter(getSupportFragmentManager(),fragmentList);
+
+
+        adapter = new MyFragmentAdapter(getSupportFragmentManager(), fragmentList);
 
     }
 
     @Override
     protected void initView() {
         x.view().inject(this);
+
         vp_main.setAdapter(adapter);
-        vp_main.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tl_main));
+        ViewPager.OnPageChangeListener l = new TabLayout.TabLayoutOnPageChangeListener(tl_main);
+        vp_main.addOnPageChangeListener(l);
         tl_main.setupWithViewPager(vp_main);
         vp_main.setOffscreenPageLimit(20);
+        tl_main.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                tab.getIcon().setTint(getResources().getColor(R.color.white));
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                tab.getIcon().setTint(getResources().getColor(R.color.blue_band_dark3));
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                tab.getIcon().setTint(getResources().getColor(R.color.white));
+            }
+        });
 
     }
 
-    private void initTabLayout(){
+    private void initTabLayout() {
 
         List<Drawable> drawableList = new ArrayList<>();
         Drawable tab_drawable = getResources().getDrawable(R.drawable.tab1_n);
-        tab_drawable.setTint(getResources().getColor(R.color.white));
+        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
         drawableList.add(tab_drawable);
         tab_drawable = getResources().getDrawable(R.drawable.tab2_n);
-        tab_drawable.setTint(getResources().getColor(R.color.white));
+        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
         drawableList.add(tab_drawable);
         tab_drawable = getResources().getDrawable(R.drawable.tab3_n);
-        tab_drawable.setTint(getResources().getColor(R.color.white));
+        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
         drawableList.add(tab_drawable);
         tab_drawable = getResources().getDrawable(R.drawable.tab4_n);
-        tab_drawable.setTint(getResources().getColor(R.color.white));
+        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
         drawableList.add(tab_drawable);
 
-        for(int i=0; i< tl_main.getTabCount(); i++){
+        for (int i=0; i< tl_main.getTabCount(); i++) {
             final TabLayout.Tab tab = tl_main.getTabAt(i);
-            if(tab != null){
-//                tab.setText(titles[i]);
+            if (tab != null) {
                 tab.setIcon(drawableList.get(i));
-
+                if (tab.isSelected()) {
+                    tab.getIcon().setTint(getResources().getColor(R.color.white));
+                }
             }
         }
+
+
     }
 
     @Override

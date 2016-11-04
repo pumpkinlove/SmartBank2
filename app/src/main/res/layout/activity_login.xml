@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="25dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -28,14 +28,16 @@
                 android:textSize="18sp"
                 android:textColor="@color/dark"
                 android:text="智慧银行"
+                android:gravity="start|center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp" />
 
             <TextView
+                android:gravity="start|center_vertical"
                 android:textColor="@color/gray_dark"
-                android:text="智能邮政， 慧及天下"
+                android:text="湖北邮政 智慧大堂"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp" />
