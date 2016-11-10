@@ -3,6 +3,7 @@ package com.miaxis.smartbank.fragment;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.miaxis.smartbank.R;
+import com.miaxis.smartbank.activity.MainActivity;
 import com.miaxis.smartbank.activity.index.CustomerActivity;
 import com.miaxis.smartbank.adapter.CustomerAdapter;
 import com.miaxis.smartbank.adapter.NoticeAdapter;
@@ -44,6 +46,10 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import xiaofei.library.hermeseventbus.HermesEventBus;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,7 +80,7 @@ public class IndexFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
+        HermesEventBus.getDefault().register(this);
     }
 
     @Override
@@ -231,38 +237,53 @@ public class IndexFragment extends Fragment {
 
         }
 
-
-
-
-
         inform();
+        beep();
+        showNotify();
     }
 
     //发出提醒， 震动， 声音
-    private void inform(){
+    private void inform() {
         //震动
         Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
         long [] pattern = {100,400,100,400};   // 停止 开启 停止 开启
         vibrator.vibrate(pattern,-1);
-        beep();
         //
     }
 
     /**
      * 提示音
      */
-    private void beep(){
+    private void beep() {
+
         NotificationManager manger = (NotificationManager)
-               getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+               getActivity().getSystemService(NOTIFICATION_SERVICE);
         Notification notification = new Notification();
         notification.defaults=Notification.DEFAULT_SOUND;
         manger.notify(1, notification);
 
     }
 
+    private void showNotify () {
+        Notification.Builder builder = new Notification.Builder(getActivity());
+        builder.setContentInfo("补充内容");
+        builder.setContentText("主内容区");
+        builder.setContentTitle("通知标题");
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setTicker("新消息");
+        builder.setAutoCancel(true);
+        builder.setWhen(System.currentTimeMillis());
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        builder.setContentIntent(pendingIntent);
+        Notification notification = builder.build();
+        NotificationManager manager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+        manager.notify(1, notification);
+    }
+
     @Override
     public void onDestroy() {
-        EventBus.getDefault().unregister(this);
+        HermesEventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 }

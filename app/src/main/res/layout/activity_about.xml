@@ -1,28 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/gray_bg"
+    android:id="@+id/activity_about"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="5dp">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:background="@color/white"
-        android:textColor="@color/blue_band_dark"
-        android:paddingStart="10dp"
-        android:text="关于"
-        android:textSize="15sp"
-        android:gravity="start|center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:elevation="5dp"/>
+    <include layout="@layout/head"/>
 
     <ImageView
-        android:layout_margin="15dp"
+        android:layout_margin="25dp"
         android:layout_gravity="center_horizontal"
         android:src="@mipmap/ic_launcher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
 
     <TextView
         android:textSize="20sp"
@@ -41,28 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:background="@drawable/white_bg_gray_ripple"
-        android:clickable="true"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-            style="@style/tv_setting"
-            android:drawableLeft="@mipmap/dot_blur"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="湖北邮政智慧银行，大堂经理PAD" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
-
     <View
         android:background="@color/gray_light"
         android:layout_width="match_parent"
@@ -71,6 +39,7 @@
     <LinearLayout
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:id="@+id/ll_function"
         android:background="@drawable/white_bg_gray_ripple"
         android:clickable="true"
         android:layout_width="match_parent"
@@ -79,34 +48,7 @@
         <TextView
             style="@style/tv_setting"
             android:drawableLeft="@mipmap/dot_blur"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="有任何建议或者反馈可以随时联系官方客服" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
-
-    <View
-        android:background="@color/gray_light"
-        android:layout_width="match_parent"
-        android:layout_height="1px"/>
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:background="@drawable/white_bg_gray_ripple"
-        android:clickable="true"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-            style="@style/tv_setting"
-            android:drawableLeft="@mipmap/dot_blur"
-            android:text="公司: 浙江中正智能科技有限公司"
+            android:text="功能介绍"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
@@ -115,6 +57,12 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
 
+        <ImageView
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <View
@@ -125,6 +73,7 @@
     <LinearLayout
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:id="@+id/ll_help"
         android:background="@drawable/white_bg_gray_ripple"
         android:clickable="true"
         android:layout_width="match_parent"
@@ -133,7 +82,7 @@
         <TextView
             style="@style/tv_setting"
             android:drawableLeft="@mipmap/dot_blur"
-            android:text="联系：service@miaxis.com"
+            android:text="帮助"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
@@ -142,6 +91,99 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
 
+        <ImageView
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
+
+    <View
+        android:background="@color/gray_light"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:id="@+id/ll_contact"
+        android:background="@drawable/white_bg_gray_ripple"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            style="@style/tv_setting"
+            android:drawableLeft="@mipmap/dot_blur"
+            android:text="联系我们"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/gray_light"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+    <View
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <LinearLayout
+        android:layout_margin="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="@color/blue_theme_normal"
+            android:gravity="center_vertical|end"
+            android:layout_marginEnd="10dp"
+            android:text="官网"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:background="@color/gray_light"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:textColor="@color/blue_theme_normal"
+            android:gravity="center_vertical|start"
+            android:layout_marginStart="10dp"
+            android:text="服务条款"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginBottom="15dp"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:text="版权所有© 浙江中正智能科技有限公司 1998-2016 保留一切权利"
+        android:textColor="@color/gray_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>

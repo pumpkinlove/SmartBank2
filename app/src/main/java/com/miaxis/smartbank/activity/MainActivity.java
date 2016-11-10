@@ -57,8 +57,6 @@ public class MainActivity extends BaseActivity {
         fragmentList.add(functionFragment);
         fragmentList.add(homeFragment);
 
-
-
         adapter = new MyFragmentAdapter(getSupportFragmentManager(), fragmentList);
 
     }
@@ -75,17 +73,57 @@ public class MainActivity extends BaseActivity {
         tl_main.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                tab.getIcon().setTint(getResources().getColor(R.color.white));
+                switch (tab.getPosition()) {
+                    case 0:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab1_p));
+                        break;
+                    case 1:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab2_p));
+                        break;
+                    case 2:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab3_p));
+                        break;
+                    case 3:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab4_p));
+                        break;
+                }
+
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                tab.getIcon().setTint(getResources().getColor(R.color.blue_band_dark3));
+                switch (tab.getPosition()) {
+                    case 0:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab1_n));
+                        break;
+                    case 1:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab2_n));
+                        break;
+                    case 2:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab3_n));
+                        break;
+                    case 3:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab4_n));
+                        break;
+                }
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                tab.getIcon().setTint(getResources().getColor(R.color.white));
+                switch (tab.getPosition()) {
+                    case 0:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab1_p));
+                        break;
+                    case 1:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab2_p));
+                        break;
+                    case 2:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab3_p));
+                        break;
+                    case 3:
+                        tab.setIcon(getResources().getDrawable(R.drawable.tab4_p));
+                        break;
+                }
             }
         });
 
@@ -95,16 +133,16 @@ public class MainActivity extends BaseActivity {
 
         List<Drawable> drawableList = new ArrayList<>();
         Drawable tab_drawable = getResources().getDrawable(R.drawable.tab1_n);
-        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
+//        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
         drawableList.add(tab_drawable);
         tab_drawable = getResources().getDrawable(R.drawable.tab2_n);
-        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
+//        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
         drawableList.add(tab_drawable);
         tab_drawable = getResources().getDrawable(R.drawable.tab3_n);
-        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
+//        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
         drawableList.add(tab_drawable);
         tab_drawable = getResources().getDrawable(R.drawable.tab4_n);
-        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
+//        tab_drawable.setTint(getResources().getColor(R.color.blue_band_dark3));
         drawableList.add(tab_drawable);
 
         for (int i=0; i< tl_main.getTabCount(); i++) {
@@ -112,11 +150,23 @@ public class MainActivity extends BaseActivity {
             if (tab != null) {
                 tab.setIcon(drawableList.get(i));
                 if (tab.isSelected()) {
-                    tab.getIcon().setTint(getResources().getColor(R.color.white));
+                    switch (tab.getPosition()) {
+                        case 0:
+                            tab.setIcon(getResources().getDrawable(R.drawable.tab1_p));
+                            break;
+                        case 1:
+                            tab.setIcon(getResources().getDrawable(R.drawable.tab2_p));
+                            break;
+                        case 2:
+                            tab.setIcon(getResources().getDrawable(R.drawable.tab3_p));
+                            break;
+                        case 3:
+                            tab.setIcon(getResources().getDrawable(R.drawable.tab4_p));
+                            break;
+                    }
                 }
             }
         }
-
 
     }
 

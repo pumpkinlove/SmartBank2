@@ -54,7 +54,8 @@
         <service
             android:name=".service.EmqttService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:process="system" />
 
         <activity
             android:name=".activity.home.ConfigActivity"
@@ -62,7 +63,7 @@
         <activity
             android:name=".activity.function.tool.ToolsActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".activity.function.CiipsActivity" />
+        <activity android:name=".activity.function.ciips.CiipsActivity" />
         <activity android:name=".activity.function.doing.BankDoingActivity" />
         <activity android:name=".activity.function.product.ProductionListActivity" />
         <activity android:name=".activity.function.analyze.AnalyzeActivity" />
@@ -79,7 +80,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.index.CustomerActivity"></activity>
+        <activity android:name=".activity.index.CustomerActivity" />
+        <activity android:name=".activity.function.navigation.NavigationActivity" />
+        <activity android:name=".activity.home.AboutActivity"></activity>
     </application>
 
 </manifest>

@@ -4,14 +4,13 @@ package com.miaxis.smartbank.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.miaxis.smartbank.R;
-import com.miaxis.smartbank.activity.function.CiipsActivity;
+import com.miaxis.smartbank.activity.function.ciips.CiipsActivity;
 import com.miaxis.smartbank.activity.function.doing.BankDoingActivity;
 import com.miaxis.smartbank.activity.function.doing.NewDoingActivity;
 import com.miaxis.smartbank.activity.function.product.ProductionListActivity;

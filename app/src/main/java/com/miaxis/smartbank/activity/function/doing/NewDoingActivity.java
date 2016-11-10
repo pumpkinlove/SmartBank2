@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -21,6 +22,7 @@ import com.miaxis.smartbank.R;
 import com.miaxis.smartbank.activity.BaseActivity;
 import com.miaxis.smartbank.application.MyApplication;
 import com.miaxis.smartbank.domain.BankDoing;
+import com.miaxis.smartbank.domain.event.RefreshNewDoingsEvent;
 import com.miaxis.smartbank.utils.CommonUtil;
 import com.miaxis.smartbank.utils.Constant;
 import com.miaxis.smartbank.utils.DateUtil;
@@ -28,6 +30,8 @@ import com.miaxis.smartbank.utils.XUtil;
 import com.miaxis.smartbank.view.BottomMenu;
 import com.miaxis.smartbank.view.ImageDialog;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.xutils.common.Callback;
 import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ContentView;
@@ -41,6 +45,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import xiaofei.library.hermeseventbus.HermesEventBus;
 
 @ContentView(R.layout.activity_new_doing)
 public class NewDoingActivity extends BaseActivity {
@@ -146,6 +152,7 @@ public class NewDoingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         x.view().inject(this);
+        HermesEventBus.getDefault().register(this);
         initData();
         initView();
 
@@ -171,7 +178,6 @@ public class NewDoingActivity extends BaseActivity {
 
     @Event(R.id.tv_left)
     private void back(View view) {
-
         finish();
     }
 
@@ -218,7 +224,7 @@ public class NewDoingActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 urlList.remove(imageDialog.getUrl());
-                refreshList();
+                HermesEventBus.getDefault().post(new RefreshNewDoingsEvent());
                 imageDialog.dismiss();
             }
         });
@@ -326,7 +332,7 @@ public class NewDoingActivity extends BaseActivity {
                 }
                 String path = o.get("path").getAsString() + "/" + o.get("newFileName").getAsString();
                 urlList.add(path);
-                refreshList();
+                HermesEventBus.getDefault().post(new RefreshNewDoingsEvent());
             }
 
             @Override
@@ -346,7 +352,8 @@ public class NewDoingActivity extends BaseActivity {
         });
     }
 
-    private void refreshList() {
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void refreshList(RefreshNewDoingsEvent event) {
         Log.e("refreshList", DateUtil.toHourMinString(new Date()) + "   =======");
         switch (urlList.size()) {
             case 0:
@@ -496,7 +503,27 @@ public class NewDoingActivity extends BaseActivity {
 
         Log.e("getPhoto0", DateUtil.toHourMinString(new Date()) + "   =======");
         if (bankDoing.getPhoto0() != null && bankDoing.getPhoto0().length() > 0) {
-            x.image().bind(ivPhoto0, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto0(), options);
+            x.image().bind(ivPhoto0, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" + bankDoing.getPhoto0(), options, new Callback.CommonCallback<Drawable>() {
+                @Override
+                public void onSuccess(Drawable result) {
+                    Log.e("onSuccess =============", DateUtil.toHourMinString(new Date()) + "   =======");
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
             ivPhoto0.setVisibility(View.VISIBLE);
         } else {
             ivPhoto0.setVisibility(View.GONE);
@@ -512,7 +539,6 @@ public class NewDoingActivity extends BaseActivity {
             ivAdd1.setVisibility(View.VISIBLE);
             return;
         }
-        Log.e("setphoto", DateUtil.toHourMinString(new Date()) + "   =======");
 
         if (bankDoing.getPhoto2() != null && bankDoing.getPhoto2().length() > 0) {
             x.image().bind(ivPhoto2, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto2(), options);
@@ -522,7 +548,6 @@ public class NewDoingActivity extends BaseActivity {
             ivAdd1.setVisibility(View.VISIBLE);
             return;
         }
-        Log.e("setphoto", DateUtil.toHourMinString(new Date()) + "   =======");
 
         if (bankDoing.getPhoto3() != null && bankDoing.getPhoto3().length() > 0) {
             x.image().bind(ivPhoto3, MyApplication.config.getUrl() + "/" + Constant.PROJECT_NAME + "/" +  bankDoing.getPhoto3(), options);
@@ -582,5 +607,9 @@ public class NewDoingActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        HermesEventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

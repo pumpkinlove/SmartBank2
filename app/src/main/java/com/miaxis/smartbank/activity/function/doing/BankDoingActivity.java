@@ -17,11 +17,8 @@ import com.miaxis.smartbank.activity.BaseActivity;
 import com.miaxis.smartbank.adapter.BankDoingAdapter;
 import com.miaxis.smartbank.application.MyApplication;
 import com.miaxis.smartbank.domain.BankDoing;
-import com.miaxis.smartbank.domain.Config;
-import com.miaxis.smartbank.domain.Production;
 import com.miaxis.smartbank.utils.CommonUtil;
 import com.miaxis.smartbank.utils.Constant;
-import com.miaxis.smartbank.utils.DateUtil;
 import com.miaxis.smartbank.utils.XUtil;
 import com.miaxis.smartbank.view.ImageDialog;
 import com.miaxis.smartbank.view.XListView;
@@ -33,7 +30,6 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +79,10 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
             @Override
             public void onPhotoClick(String url) {
                 dialog.setUrl(url);
-                dialog.show(getFragmentManager(), "");
+                if (dialog.isDetached()) {
+                    dialog.dismiss();
+                }
+                dialog.show(getFragmentManager(), "IMG_DIALOG");
             }
         });
 
@@ -93,7 +92,6 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
 
     @Override
     protected void initView() {
-
         tvLeft.setVisibility(View.VISIBLE);
         tvMiddle.setText("网点活动");
         tvRight.setVisibility(View.VISIBLE);
@@ -129,13 +127,13 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
                     return;
                 }
 
-                if(isClear){
+                if (isClear) {
                     bankDoingList.clear();
                 }
 
                 JsonArray jsonArray = o.getAsJsonArray("rows");
-                total = jsonArray.size();
-                if (page > total) {
+                total = o.get("total").getAsInt();
+                if (total <= bankDoingList.size()) {
                     Toast.makeText(getApplication(), "已经加载到最后一条", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -192,4 +190,13 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
         startActivityForResult(new Intent(this, NewDoingActivity.class), 1);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1 :
+                if (requestCode == RESULT_OK) {
+                    refreshList();
+                }
+        }
+    }
 }

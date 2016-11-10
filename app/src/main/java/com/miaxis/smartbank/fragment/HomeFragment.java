@@ -14,13 +14,13 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.miaxis.smartbank.R;
+import com.miaxis.smartbank.activity.home.AboutActivity;
 import com.miaxis.smartbank.activity.home.ConfigActivity;
 import com.miaxis.smartbank.application.MyApplication;
 import com.miaxis.smartbank.domain.Version;
 import com.miaxis.smartbank.utils.CommonUtil;
 import com.miaxis.smartbank.utils.Constant;
 import com.miaxis.smartbank.utils.XUtil;
-import com.miaxis.smartbank.view.AboutDialog;
 import com.miaxis.smartbank.view.UpdateDialog;
 
 import org.xutils.common.Callback;
@@ -38,7 +38,6 @@ public class HomeFragment extends Fragment {
 
     private ProgressDialog pd_check_version;
     private UpdateDialog updateDialog;
-    private AboutDialog aboutDialog;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -64,7 +63,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void initData() {
-        aboutDialog = new AboutDialog();
         updateDialog = new UpdateDialog();
         pd_check_version = new ProgressDialog(getContext());
     }
@@ -78,7 +76,7 @@ public class HomeFragment extends Fragment {
 
     @Event(R.id.ll_about)
     private void about(View view) {
-        aboutDialog.show(getActivity().getFragmentManager(), "ABOUT");
+        startActivity(new Intent(getActivity(), AboutActivity.class));
     }
 
     @Event(R.id.ll_config)
@@ -86,7 +84,7 @@ public class HomeFragment extends Fragment {
         startActivity(new Intent(getActivity(), ConfigActivity.class));
     }
 
-    @Event(R.id.tv_update)
+    @Event(R.id.ll_update)
     private void checkVersion(View view) {
         Log.e("---------","checkVersion");
 

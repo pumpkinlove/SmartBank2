@@ -78,7 +78,7 @@ public class BottomMenu implements View.OnTouchListener{
     }
 
     @Event(value = {R.id.btn_menu_1, R.id.btn_menu_2, R.id.btn_menu_3})
-    private void onBtn1Clicked(View view) {
+    private void onBtnClicked(View view) {
         listener.onClick(view);
     }
 

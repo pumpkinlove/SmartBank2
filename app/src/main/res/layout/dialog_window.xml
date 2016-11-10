@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@null"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="5dp">
 
     <LinearLayout
         android:orientation="horizontal"
-        android:background="@color/blue_band_dark"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="40dp">
 
@@ -17,69 +18,8 @@
             android:id="@+id/d_window_no"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-            android:text="柜员姓名"
-            android:background="@color/blue_band_dark3"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-        <View
-            android:background="@color/gray_light"
-            android:layout_width="1px"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:id="@+id/d_window_worker_name"
             android:textColor="@color/dark"
-            android:textSize="14sp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-        <View
-            android:background="@color/gray_light"
-            android:layout_width="1px"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:text="业务类型"
-            android:background="@color/blue_band_dark3"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-        <View
-            android:background="@color/gray_light"
-            android:layout_width="1px"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:id="@+id/d_window_type"
-            android:textColor="@color/dark"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
 
@@ -91,133 +31,206 @@
         android:layout_height="1px"/>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:text="好评"
-            android:background="@color/blue_band_dark3"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:text="柜员姓名"
+                android:background="@color/blue_band_dark3"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/d_window_worker_name"
+                android:textColor="@color/dark"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:text="业务类型"
+                android:background="@color/blue_band_dark3"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/d_window_type"
+                android:textColor="@color/dark"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
 
         <View
             android:background="@color/gray_light"
-            android:layout_width="1px"
-            android:layout_height="match_parent"/>
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
 
-        <TextView
-            android:id="@+id/d_window_good"
-            android:textColor="@color/dark"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:text="好评"
+                android:background="@color/blue_band_dark3"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/d_window_good"
+                android:textColor="@color/dark"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:text="差评"
+                android:background="@color/blue_band_dark3"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/d_window_bad"
+                android:textColor="@color/dark"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
 
         <View
             android:background="@color/gray_light"
-            android:layout_width="1px"
-            android:layout_height="match_parent"/>
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
 
-        <TextView
-            android:text="差评"
-            android:background="@color/blue_band_dark3"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:text="状态"
+                android:background="@color/blue_band_dark3"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/d_window_status"
+                android:textColor="@color/dark"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:text="平均办理时长"
+                android:background="@color/blue_band_dark3"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <View
+                android:background="@color/gray_light"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/d_window_average_time"
+                android:textColor="@color/dark"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
 
         <View
             android:background="@color/gray_light"
-            android:layout_width="1px"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:id="@+id/d_window_bad"
-            android:textColor="@color/dark"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
 
     </LinearLayout>
 
-    <View
-        android:background="@color/gray_light"
-        android:layout_width="match_parent"
-        android:layout_height="1px"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-            android:text="状态"
-            android:background="@color/blue_band_dark3"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-        <View
-            android:background="@color/gray_light"
-            android:layout_width="1px"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:id="@+id/d_window_status"
-            android:textColor="@color/dark"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-        <View
-            android:background="@color/gray_light"
-            android:layout_width="1px"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:text="平均办理时长"
-            android:background="@color/blue_band_dark3"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-        <View
-            android:background="@color/gray_light"
-            android:layout_width="1px"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:id="@+id/d_window_average_time"
-            android:textColor="@color/dark"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-    <View
-        android:background="@color/gray_light"
-        android:layout_width="match_parent"
-        android:layout_height="1px"/>
 
 </LinearLayout>

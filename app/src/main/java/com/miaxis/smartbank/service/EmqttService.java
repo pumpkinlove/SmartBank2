@@ -1,7 +1,9 @@
 package com.miaxis.smartbank.service;
 
+import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -17,7 +19,8 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import org.greenrobot.eventbus.EventBus;
+
+import xiaofei.library.hermeseventbus.HermesEventBus;
 
 public class EmqttService extends Service {
 
@@ -40,6 +43,7 @@ public class EmqttService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        startForeground(-1000, new Notification());
 //        Toast.makeText(this,"onCreate",Toast.LENGTH_SHORT).show();
         config = ((MyApplication) getApplicationContext()).config;
         if (config == null) {
@@ -71,7 +75,7 @@ public class EmqttService extends Service {
                         @Override
                         public void messageArrived(String topic, MqttMessage message) throws Exception {
                             Log.e("-----","messageArrived");
-                            EventBus.getDefault().post(new NotifyEvent(topic, message.toString()));
+                            HermesEventBus.getDefault().post(new NotifyEvent(topic, message.toString()));
                         }
 
                         @Override
@@ -92,7 +96,7 @@ public class EmqttService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//        Toast.makeText(this,"onStartCommand",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"onStartCommand",Toast.LENGTH_SHORT).show();
         return START_REDELIVER_INTENT;
     }
 

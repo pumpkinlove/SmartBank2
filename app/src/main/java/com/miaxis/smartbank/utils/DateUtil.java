@@ -10,7 +10,7 @@ import java.util.Date;
 public class DateUtil {
 
     public static String toHourMinString(Date date){
-        SimpleDateFormat myFmt = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat myFmt = new SimpleDateFormat("HH:mm:ss");
         return myFmt.format(date);
     }
 

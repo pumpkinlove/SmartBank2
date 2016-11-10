@@ -20,6 +20,8 @@ import org.xutils.x;
 import java.io.File;
 import java.util.Date;
 
+import xiaofei.library.hermeseventbus.HermesEventBus;
+
 /**
  * Created by xu.nan on 2016/9/22.
  */
@@ -34,8 +36,9 @@ public class MyApplication extends Application {
         x.Ext.init(this);
         super.onCreate();
 
-        EventBus.getDefault().register(this);
-
+//        EventBus.getDefault().register(this);
+        HermesEventBus.getDefault().init(this);
+        HermesEventBus.getDefault().register(this);
         initDB();
         initService();
         initConfig();
@@ -73,8 +76,8 @@ public class MyApplication extends Application {
             if (config == null) {
                 config = new Config();
                 config.setId(1);
-                config.setIp("192.168.5.96");
-                config.setPort("8080");
+                config.setIp("120.26.51.167");
+                config.setPort("80");
                 config.setEmqttIp("120.26.51.167");
                 config.setEmqttPort("1883");
                 config.setClientId("default" + new Date().getTime());
@@ -87,7 +90,7 @@ public class MyApplication extends Application {
 
     @Override
     public void onTerminate() {
-        EventBus.getDefault().unregister(this);
+        HermesEventBus.getDefault().unregister(this);
         super.onTerminate();
     }
 
