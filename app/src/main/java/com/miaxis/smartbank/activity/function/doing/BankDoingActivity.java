@@ -30,9 +30,11 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @ContentView(R.layout.activity_bank_doing)
 public class BankDoingActivity extends BaseActivity implements XListView.IXListViewListener {
@@ -79,10 +81,7 @@ public class BankDoingActivity extends BaseActivity implements XListView.IXListV
             @Override
             public void onPhotoClick(String url) {
                 dialog.setUrl(url);
-                if (dialog.isDetached()) {
-                    dialog.dismiss();
-                }
-                dialog.show(getFragmentManager(), "IMG_DIALOG");
+                dialog.show(getFragmentManager(), "IMG_DIALOG"+ new Date().getTime());
             }
         });
 
