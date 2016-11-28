@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.miaxis.smartbank.R;
+import com.miaxis.smartbank.activity.function.analyze.AnalyzeActivity;
 import com.miaxis.smartbank.activity.function.ciips.CiipsActivity;
 import com.miaxis.smartbank.activity.function.doing.BankDoingActivity;
 import com.miaxis.smartbank.activity.function.doing.NewDoingActivity;
@@ -73,6 +74,11 @@ public class FunctionFragment extends Fragment {
     @Event(R.id.tv_func_production)
     private void production(View view) {
         startActivity(new Intent(getActivity(), ProductionListActivity.class));
+    }
+
+    @Event(R.id.tv_func_analyze)
+    private void analyze(View view) {
+        startActivity(new Intent(getActivity(), AnalyzeActivity.class));
     }
 
     @Override

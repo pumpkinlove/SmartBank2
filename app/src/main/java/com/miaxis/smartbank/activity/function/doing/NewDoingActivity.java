@@ -256,6 +256,11 @@ public class NewDoingActivity extends BaseActivity {
 
     @Event(R.id.tv_right)
     private void upload(View view) {
+
+        if (tvContent.getText().length() <= 0) {
+            return;
+        }
+
         bankDoing.setContent(tvContent.getText().toString());
         bankDoing.setOrganname(MyApplication.config.getOrganname());
         bankDoing.setOrganid(MyApplication.config.getOrganid());
@@ -287,7 +292,7 @@ public class NewDoingActivity extends BaseActivity {
                 JsonObject o = element.getAsJsonObject();
                 boolean success = o.get("success").getAsBoolean();
                 if (!success) {
-                    CommonUtil.alert(getFragmentManager(), "与服务器通讯失败");
+                    CommonUtil.alert(getFragmentManager(), "服务器繁忙，请稍后再试 >_<");
                     return;
                 }
                 setResult(RESULT_OK);
@@ -296,6 +301,7 @@ public class NewDoingActivity extends BaseActivity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
+                CommonUtil.alert(getFragmentManager(), "与服务器通讯失败");
                 Log.e("ex", ex.getMessage());
             }
 
@@ -311,7 +317,6 @@ public class NewDoingActivity extends BaseActivity {
         });
 
     }
-
 
     private void uploadPhoto(final int index, File file) {
         Log.e("uploadPhoto", DateUtil.toHourMinString(new Date()) + "   =======");
